@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,15 +24,21 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "csv") // LAZY 순환/로그폭탄 방지
 @Entity
 @Builder
+@Table(uniqueConstraints = {
+		@UniqueConstraint(name="uq_epc_fileId_epcCode", columnNames={"file_id","epc_code"}), // Prevent duplication
+	    @UniqueConstraint(name="uq_epc_fileId_epcId",   columnNames={"file_id","epc_id"}) // EventHistory 복합 FK 타깃
+  })
 public class Epc {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "epc_id") // UniqueConstraint와 컬럼명 일치
 	private Long epcId; // epcCode가 길어서 auto-increment가 유리
 	
+	@Column(name = "epc_code", nullable = false, length = 64) // UniqueConstraint와 컬럼명 일치
 	private String epcCode;
 	
 	private String epcHeader;
@@ -42,14 +50,8 @@ public class Epc {
 	//N:1 여러개의 epc_code가 하나의 상품에 있을 수 있음.
 	//N:1에서 N은 자식이며, 관계의 주인!
 	@ManyToOne(fetch = FetchType.LAZY) // FK
-	@JoinColumn(name = "location_id")
-	private CsvLocation csvLocation;
-	
-	//N:1 여러개의 epc_code가 하나의 상품에 있을 수 있음.
-	//N:1에서 N은 자식이며, 관계의 주인!
-	@ManyToOne(fetch = FetchType.LAZY) // FK
-	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
-	private CsvProduct csvProduct;
+	@JoinColumn(name = "file_id", nullable = false)
+	private Csv csv;
 	
 	private LocalDateTime manufactureDate;
 	private LocalDate expiryDate;
