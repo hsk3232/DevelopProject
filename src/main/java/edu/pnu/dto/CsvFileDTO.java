@@ -66,5 +66,20 @@ public abstract class CsvFileDTO {
 			return new FileListResponse(fileInfos, nextCursor);
 		}
 	}
+	
+	// 리포트 표지 정보 응답을 위한 DTO (기존 ReportCoverDTO 역할)
+   @Getter
+   @Setter
+   @Builder
+   @NoArgsConstructor
+   @AllArgsConstructor
+   public static class ReportCoverResponse {
+       private String fileName;
+       private String userName;
+       private Long locationId;
+       private LocalDateTime createdAt;
+       private LocalDateTime periodStart;
+       private LocalDateTime periodEnd;
+   }
 
 }

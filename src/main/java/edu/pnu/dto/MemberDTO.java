@@ -1,7 +1,5 @@
 package edu.pnu.dto;
 
-import java.time.LocalDateTime;
-
 import edu.pnu.domain.AssetLocation;
 import edu.pnu.domain.Member;
 import edu.pnu.domain.Role;
@@ -47,6 +45,14 @@ public abstract class MemberDTO {
 					.build();
 		}
 	}
+	
+	// [ID 중복 확인] : 아이디 중복 확인 요청을 위한 DTO 
+	// 기존 LoginDTO의 idsearch 역할
+    @Getter 
+    @Setter
+    public static class IdSearchRequest {
+        private String userId;
+    }
 
 	// [로그인] : 회원 로그인 요청을 위한 DTO
 	// 기존 LoginDTO

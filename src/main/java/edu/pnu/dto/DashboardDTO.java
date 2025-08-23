@@ -17,7 +17,7 @@ public abstract class DashboardDTO {
 //	 ■■■■■■■■■■■■■■ [ 중첩 클래스 ] ■■■■■■■■■■■■■ 
 	// 다른 Response DTO에서 재사용되는 내부 클래스
 
-	// 기존 AnalyzedTripDTO의 내부 클래스 → AnalyzedTripResponse에서 사용
+	// 기존 AnalyzedTripDTO의 내부 클래스 → AnalyzedTripResponse에서 객체로 사용
 	@Getter
 	@Setter
 	@Builder
@@ -72,6 +72,15 @@ public abstract class DashboardDTO {
 		private String businessStep;
 		private List<Double> coord;
 	}
+	
+	@Getter
+    @AllArgsConstructor // 모든 필드를 받는 생성자 (JPA Constructor Expression이 사용)
+    @ToString
+    public static class TimeRange { // DTO 접미사를 빼서 값 객체임을 더 명확히 함
+        private final LocalDateTime minTime; // 불변성을 위해 final 유지
+        private final LocalDateTime maxTime;
+    }
+	
 
 //	 ■■■■■■■■■■■■ [ RESPONSE DTO ] ■■■■■■■■■■■■ 
 
@@ -87,6 +96,7 @@ public abstract class DashboardDTO {
 		private Long nextCursor;
 		private Integer pageSize;
 		private Boolean hasNext;
+	
 
 		@Getter
 		@Setter
@@ -128,10 +138,12 @@ public abstract class DashboardDTO {
 				this.fileId = fileId;
 				this.epcCode = epcCode;
 				this.productName = productName;
-
+				this.epcLot = epcLot;
+				this.roadId = roadId;
+				this.anomalyTypeList = new ArrayList<>();
 			}
-
 		}
+	}
 
 		// 대시보드 필터 옵션 목록 응답을 위한 DTO
 		@Getter
@@ -141,6 +153,7 @@ public abstract class DashboardDTO {
 		@AllArgsConstructor
 		public static class FilterOptionsResponse {
 			private List<String> scanLocations;
+			// eventTimeRange는 서비스 레이어에서 TimeRange 객체를 받아 가공하여 채워짐
 			private List<LocalDateTime> eventTimeRange;
 			private List<String> businessSteps;
 			private List<String> productNames;
@@ -212,6 +225,6 @@ public abstract class DashboardDTO {
 			private List<String> toLocation;
 		}
 
-	}
+	
 
 }
