@@ -27,7 +27,7 @@ public abstract class DashboardDTO {
 	public static class TripPoint {
 		private String scanLocation;
 		private List<Double> coord;
-		private Long evnetTime;
+		private Long eventTime;
 		private String businessStep;
 	}
 
@@ -68,7 +68,7 @@ public abstract class DashboardDTO {
 	@Builder
 	public static class NodeInfo {
 		private String hubType;
-		private String sacnLocation;
+		private String scanLocation;
 		private String businessStep;
 		private List<Double> coord;
 	}
@@ -126,13 +126,13 @@ public abstract class DashboardDTO {
 				this.from = TripPoint.builder().scanLocation(fromScanLocation)
 						.coord(fromLongitude != null && fromLatitude != null ? List.of(fromLongitude, fromLatitude)
 								: new ArrayList<>())
-						.evnetTime(fromEventTime != null ? fromEventTime.toEpochSecond(ZoneOffset.UTC) : null)
+						.eventTime(fromEventTime != null ? fromEventTime.toEpochSecond(ZoneOffset.UTC) : null)
 						.businessStep(fromBusinessStep).build();
 
 				this.to = TripPoint.builder().scanLocation(toScanLocation)
 						.coord(toLongitude != null && toLatitude != null ? List.of(toLongitude, toLatitude)
 								: new ArrayList<>())
-						.evnetTime(toEventTime != null ? toEventTime.toEpochSecond(ZoneOffset.UTC) : null)
+						.eventTime(toEventTime != null ? toEventTime.toEpochSecond(ZoneOffset.UTC) : null)
 						.businessStep(toBusinessStep).build();
 
 				this.fileId = fileId;
@@ -169,7 +169,7 @@ public abstract class DashboardDTO {
 		@NoArgsConstructor
 		@AllArgsConstructor
 		@Builder
-		public static class KipResponse {
+		public static class KpiResponse {
 			private Long kpiId;
 			private Long anomalyCount;
 			private double anomalyRate;

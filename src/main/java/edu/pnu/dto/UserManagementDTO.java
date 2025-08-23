@@ -61,7 +61,7 @@ public abstract class UserManagementDTO {
 		private String userId;
 		private String userName;
 		private Role role;
-		private Long loacationId;
+		private Long locationId;
 		private String locationName;
 		private String status;
 		private LocalDateTime createdAt;
@@ -72,7 +72,7 @@ public abstract class UserManagementDTO {
 					.userId(m.getUserId())
 					.userName(m.getUserName())
 					.role(m.getRole())
-					.loacationId(m.getAssetLocation() != null ? m.getAssetLocation().getLocationId() : null)
+					.locationId(m.getAssetLocation() != null ? m.getAssetLocation().getLocationId() : null)
 					.locationName(m.getAssetLocation() != null ? m.getAssetLocation().getScanLocation() : null)
 					.status(m.getStatus())
 					.createdAt(m.getCreatedAt())

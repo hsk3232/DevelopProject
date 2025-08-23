@@ -30,7 +30,7 @@ public abstract class CsvFileDTO {
 		private String fileName;
 		private String userId;
 		private Long fileSize;
-		private LocalDateTime createAt;
+		private LocalDateTime createdAt;
 
 		public static FileInfo from(Csv c) {
 			return FileInfo.builder()
@@ -38,7 +38,7 @@ public abstract class CsvFileDTO {
 					.fileName(c.getFileName())
 					.userId(c.getMember().getUserId())
 					.fileSize(c.getFileSize())
-					.createAt(c.getCreatedAt())
+					.createdAt(c.getCreatedAt())
 					.build();
 		}
 	}

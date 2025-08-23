@@ -70,10 +70,22 @@ public class EventHistory {
   @JoinColumn(name = "product_id", nullable = false)
   private CsvProduct csvProduct;
 
-  private LocalDateTime eventTime;
+  @Column(name = "hub_type")
+  private String hubType;
 
+  @Column(name = "business_step", nullable = false)
   private String businessStep;
 
+  @Column(name = "event_type", nullable = false)
   private String eventType;
+  
+  @Column(name = "event_time", nullable = false)
+  private LocalDateTime eventTime;
+  
+  @Column(name = "business_original")
+  private String businessOriginal;
+
+
+  
     
 }

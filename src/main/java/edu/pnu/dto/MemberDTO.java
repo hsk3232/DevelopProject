@@ -3,6 +3,9 @@ package edu.pnu.dto;
 import edu.pnu.domain.AssetLocation;
 import edu.pnu.domain.Member;
 import edu.pnu.domain.Role;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,16 +21,21 @@ public abstract class MemberDTO {
 	// [회원 가입 요청] : 회원 가입 요청을 위한 DTO
 	@Getter
 	@Setter
+	@ToString(exclude = "password")
 	@Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
-	@ToString
 	public static class JoinRequest {
+		@NotBlank
 		private String userId;
+		@NotBlank
 		private String userName;
+		@NotBlank
 		private String password;
+		@Email
 		private String email;
 		private String phone;
+		@Positive
 		private Long locationId; // AssetLocation
 		private Role role;
 
@@ -40,7 +48,7 @@ public abstract class MemberDTO {
 					.password(encryptedPassword)
 					.email(email)
 					.phone(phone)
-					.role(role != null ? role : Role.ROLE_UNAUTH)
+					.role(Role.ROLE_UNAUTH)
 					.assetLocation(ALocation)
 					.build();
 		}
@@ -59,6 +67,7 @@ public abstract class MemberDTO {
 	@Getter
 	@Setter
 	@Builder
+	@ToString(exclude = {"password"})
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class LoginRequest { // 기존 LoginDTO 역할
@@ -85,6 +94,7 @@ public abstract class MemberDTO {
 	@Getter
 	@Setter
 	@Builder
+	@ToString(exclude = {"currentPassword","newPassword"})
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class ChangePasswordRequest {
