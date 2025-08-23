@@ -27,7 +27,7 @@ import lombok.ToString;
 @Table(name ="csvproduct", uniqueConstraints = {
 	    @UniqueConstraint(
 	    	      name="uq_csvProduct",
-	    	      columnNames = {"file_id", "epc_company", "epc_product", "product_name"}) // ★ 파일 내 원문 조합 유니크    	  
+	    	      columnNames = {"file_id", "epc_company", "epc_product"}) // 파일 내 동일 상품 코드 조합 중복 금지 	  
 	  })
 public class CsvProduct {
 	@Id

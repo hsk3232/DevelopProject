@@ -23,8 +23,11 @@ import lombok.ToString;
 @Entity
 @Builder
 @Table(name ="csvlocation", uniqueConstraints = {
-	    @UniqueConstraint(name="uq_csvloc_fileId_locationId", columnNames = {"file_id", "location_id"})
-	  })
+	    @UniqueConstraint(
+	    		name="uq_csvLocation_fileId_locationId", 
+	    		columnNames = {"file_id", "location_id"} // 파일 내 동일 위치명 중복 금지
+	    		)
+	    }) 
 public class CsvLocation {
 	@Id
 	@Column(name="location_id", nullable=false)

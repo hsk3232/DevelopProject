@@ -26,11 +26,14 @@ import lombok.ToString;
 @ToString(exclude = {"csv","epc","csvLocation","csvProduct"})
 @Entity
 @Table(
-  name = "event_history",
+  name = "eventhistory",
   uniqueConstraints = {
-    @UniqueConstraint(name = "uq_eh_file_epc_time",
-      columnNames = {"file_id","epc_id","event_time"})
-  },
+		  // 비즈니스 규칙: 특정 파일의, 특정 EPC는, 특정 시간, 특정 위치, 특정 이벤트 타입을 중복으로 가질 수 없음.
+		// 이 제약조건은 event_id를 제외한 완벽하게 동일한 이벤트 데이터의 중복 삽입을 방지
+		    @UniqueConstraint(
+		      name = "uq_prevent_duplicate_event_history",
+		      columnNames = {"file_id", "epc_id", "csv_location_id", "product_id", "eventTime", 
+		        "businessStep", "eventType" })},
   indexes = {
     @Index(name = "ix_eh_epc_time", columnList = "file_id,epc_id,event_time"),
     @Index(name = "ix_eh_loc_time", columnList = "file_id,csv_location_id,event_time")
@@ -64,15 +67,13 @@ public class EventHistory {
   private CsvLocation csvLocation;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "product_id")
-  private CsvProduct csvProduct; // 선택: 이벤트 시점 상품을 담고 싶을 때
+  @JoinColumn(name = "product_id", nullable = false)
+  private CsvProduct csvProduct;
 
   private LocalDateTime eventTime;
 
   private String businessStep;
 
   private String eventType;
-  
-  @Builder.Default
-  private boolean anomaly = false;
+    
 }

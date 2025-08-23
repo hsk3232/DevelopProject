@@ -28,8 +28,8 @@ import lombok.ToString;
 @Entity
 @Builder
 @Table(uniqueConstraints = {
-		@UniqueConstraint(name="uq_epc_fileId_epcCode", columnNames={"file_id","epc_code"}), // Prevent duplication
-	    @UniqueConstraint(name="uq_epc_fileId_epcId",   columnNames={"file_id","epc_id"}) // EventHistory 복합 FK 타깃
+		@UniqueConstraint(name="uq_epc_file_id_epc_code", columnNames={"file_id","epc_code"}), // Prevent duplication
+	    @UniqueConstraint(name="uq_epc_file_id_epc_id",   columnNames={"file_id","epc_id"}) // EventHistory 복합 FK 타깃
   })
 public class Epc {
 	
