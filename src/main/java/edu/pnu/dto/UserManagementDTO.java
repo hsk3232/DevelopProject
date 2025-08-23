@@ -13,13 +13,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-public class UserManagementDTO {
+public abstract class UserManagementDTO {
 
-	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ //
-	// ■■■■■■■■■■■■ [ REQUEST DTO ] ■■■■■■■■■■■■ //
-	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ //
+	// ■■■■■■■■■■■■ [ REQUEST DTO ] ■■■■■■■■■■■■
 
-	// [Admin 용] : 사용자의 상태 변경을 요청
+	// [Admin 전용][가입 승인/사용 승인] : 사용자의 상태 변경을 요청
+	// 기존 UserStatusUpdateDTO
 	@Getter
 	@Setter
 	@Builder
@@ -31,7 +30,9 @@ public class UserManagementDTO {
 		private String status;
 	}
 
-	// [Admin 용] : 사용자의 소속 공장(위치) 변경을 요청
+	
+	// [Admin 전용][소속 공장 변경] : 사용자의 소속 공장(위치) 변경을 요청
+	// 기존 UserFactoryUpdateDTO
 	@Getter
 	@Setter
 	@Builder
@@ -44,11 +45,11 @@ public class UserManagementDTO {
 	}
 
 	
-	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ //
-	// ■■■■■■■■■■■■ [ RESPONSE DTO ] ■■■■■■■■■■■■ //
-	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ //
+	
+	// ■■■■■■■■■■■■ [ RESPONSE DTO ] ■■■■■■■■■■■■
 
 	// [회원 정보 응답] : 회원 정보 응답을 위한 DTO
+	// 기존 UserResponseDTO
 	@Getter
 	@Setter
 	@Builder
