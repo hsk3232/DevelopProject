@@ -37,4 +37,5 @@ public interface EpcRepository extends JpaRepository<Epc, Long> {
                         row -> (Epc) row[1]
                 ));
     }
+
 }

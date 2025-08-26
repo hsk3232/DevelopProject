@@ -117,16 +117,17 @@ public class CsvSaveService {
             new HashSet<>(csvLocationRepo.findAllLocationIds()),
             csvProductRepo.findAllByFileIdAsMap(csv.getFileId()),
             epcRepo.findAllByFileIdAsMap(csv.getFileId()),
-            epcRepo.findAllCodesByFileId(csv.getFileId())
+            epcRepo.findAllEpcCodesByFileId(csv.getFileId())
         );
         final Map<String, List<Integer>> errorRows = new HashMap<>();
 
         // 3. 파일 파싱 및 청크 처리
         final Path filePath = Paths.get(fileUploadDir, csv.getSavedFileName());
         try (BufferedReader reader = Files.newBufferedReader(filePath, StandardCharsets.UTF_8)) {
-            final CSVReader csvReader = new CSVReaderBuilder(reader).withCSVParser(new CSVParserBuilder().withSeparator('\t').build()).build();
+            final CSVReader csvReader = new CSVReaderBuilder(reader).withCSVParser(new CSVParserBuilder().withSeparator(',').build()).build();
             final String[] header = csvReader.readNext();
             final Map<String, Integer> colIdx = getColumnIndexMap(header);
+            final Set<Long> seenEventKeys = new HashSet<>();
 
             String[] row;
             List<String[]> chunk = new ArrayList<>(CHUNK_SIZE);
@@ -135,12 +136,14 @@ public class CsvSaveService {
                 rowNum++;
                 chunk.add(row);
                 if (chunk.size() >= CHUNK_SIZE) {
-                	processChunk(chunk, colIdx, csv, errorRows, rowNum - CHUNK_SIZE, cache);
+                	int startRowNum = rowNum - CHUNK_SIZE;
+                	processChunk(chunk, colIdx, csv, errorRows, startRowNum, cache, seenEventKeys);
                     chunk.clear();
                 }
             }
             if (!chunk.isEmpty()) {
-                processChunk(chunk, colIdx, csv, errorRows, rowNum - chunk.size(), cache);
+            	int startRowNum = rowNum - chunk.size();
+                processChunk(chunk, colIdx, csv, errorRows, startRowNum, cache, seenEventKeys);
             }
 
         } catch (Exception e) {
@@ -149,7 +152,8 @@ public class CsvSaveService {
         }
 
         if (!errorRows.isEmpty()) {
-            log.warn("[경고] : [CsvSaveService] CSV 파일에 오류 행이 발견되었습니다. fileId={}, 오류 건수={}", csv.getFileId(), errorRows.size());
+        	int total = errorRows.values().stream().mapToInt(List::size).sum();
+            log.warn("[경고] : [CsvSaveService] CSV 파일에 오류 행이 발견되었습니다. fileId={}, 오류 건수={}", csv.getFileId(), total);
         }
 
         webSocketService.sendMessage(userId, "CSV 파일 저장이 완료되었습니다. 분석을 시작합니다.");
@@ -377,7 +381,7 @@ public class CsvSaveService {
 	        }
 	    }
 
-	    private LocalDateTime tryParseDateTime(String value,
+	    private LocalDateTime tryParseDateTime(String value, 
 	                                           DateTimeFormatter formatter,
 	                                           Map<String, List<Integer>> errorRows,
 	                                           int rowNum,
