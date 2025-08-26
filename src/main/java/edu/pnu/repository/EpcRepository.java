@@ -12,7 +12,9 @@ import org.springframework.data.repository.query.Param;
 import edu.pnu.domain.Epc;
 
 public interface EpcRepository extends JpaRepository<Epc, Long> {
-    // CSV 파싱 시 중복 체크를 위해 파일 내 모든 epcCode를 조회
+    
+	// CsvSaveService.postCsvAndTriggerAsyncProcessing()
+	// CSV 파싱 시 중복 체크를 위해 파일 내 모든 epcCode를 조회
     @Query("""
     		SELECT e.epcCode 
     		FROM Epc e 
@@ -21,7 +23,8 @@ public interface EpcRepository extends JpaRepository<Epc, Long> {
     Set<String> findAllEpcCodesByFileId(@Param("fileId") Long fileId);
     
     
- //	Map 반환을 위한 쿼리
+    // CsvSaveService.postCsvAndTriggerAsyncProcessing()
+    //	Map 반환을 위한 쿼리
     @Query("""
     		SELECT e.epcCode, e 
     		FROM Epc e 
@@ -29,6 +32,8 @@ public interface EpcRepository extends JpaRepository<Epc, Long> {
     		""")
     List<Object[]> findAllByFileIdForMap(@Param("fileId") Long fileId);
 
+    
+    // CsvSaveService.postCsvAndTriggerAsyncProcessing()
     // Default 메서드를 사용하여 Map 변환 로직 캡슐화
     default Map<String, Epc> findAllByFileIdAsMap(Long fileId) {
         return findAllByFileIdForMap(fileId).stream()

@@ -19,6 +19,7 @@ public interface CsvProductRepository extends JpaRepository<CsvProduct, Long> {
     		""")
     List<CsvProduct> findAllByFileId(@Param("fileId") Long fileId);
     
+    // CsvSaveService.postCsvAndTriggerAsyncProcessing()
     // Key-Value 형태의 Map을 반환하기 위해 List<Object[]>를 먼저 조회
     @Query("""
     		SELECT p.epcCompany, p.epcProduct, p 
@@ -27,6 +28,7 @@ public interface CsvProductRepository extends JpaRepository<CsvProduct, Long> {
     		""")
     List<Object[]> findAllByFileIdForMap(@Param("fileId") Long fileId);
 
+    
     // Default 메서드를 사용하여 서비스 레이어의 변환 로직을 캡슐화
     default Map<String, CsvProduct> findAllByFileIdAsMap(Long fileId) {
         return findAllByFileIdForMap(fileId).stream()

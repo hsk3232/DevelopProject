@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.opencsv.CSVParserBuilder;
@@ -49,7 +51,6 @@ import edu.pnu.repository.CsvProductRepository;
 import edu.pnu.repository.CsvRepository;
 import edu.pnu.repository.EpcRepository;
 import edu.pnu.repository.MemberRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -124,7 +125,12 @@ public class CsvSaveService {
         // 3. 파일 파싱 및 청크 처리
         final Path filePath = Paths.get(fileUploadDir, csv.getSavedFileName());
         try (BufferedReader reader = Files.newBufferedReader(filePath, StandardCharsets.UTF_8)) {
-            final CSVReader csvReader = new CSVReaderBuilder(reader).withCSVParser(new CSVParserBuilder().withSeparator(',').build()).build();
+            final CSVReader csvReader = new CSVReaderBuilder(reader).withCSVParser(
+            		new CSVParserBuilder()
+            		.withQuoteChar('"')                // "a,b" 같은 값 처리
+                    .withEscapeChar('\\')
+                    .withIgnoreLeadingWhiteSpace(true) // " a " → "a"
+                    .build()).build();
             final String[] header = csvReader.readNext();
             final Map<String, Integer> colIdx = getColumnIndexMap(header);
             final Set<Long> seenEventKeys = new HashSet<>();
@@ -322,12 +328,13 @@ public class CsvSaveService {
 	    }
 
 	    // ── Helper ──────────────────────────────────────────────────────────────────
-
+	    
+	    // 확장자 검사
 	    private void validateFile(MultipartFile file) {
 	        if (file == null || file.isEmpty()) throw new CsvFileNotFoundException("업로드된 파일이 없습니다.");
 	        String name = Objects.requireNonNull(file.getOriginalFilename()).toLowerCase();
-	        if (!name.endsWith(".csv") && !name.endsWith(".tsv")) {
-	            throw new FileUploadException("CSV/TSV 파일 형식이 아닙니다.");
+	        if (!name.endsWith(".csv")) {
+	            throw new FileUploadException("CSV 파일 형식이 아닙니다.");
 	        }
 	    }
 
@@ -436,15 +443,18 @@ public class CsvSaveService {
 	                                 LocalDateTime eventTime,
 	                                 String businessStep,
 	                                 String eventType) {
-	        return String.join("|",
+	        String epoch = (eventTime != null)
+	                ? String.valueOf(eventTime.atZone(ZoneOffset.UTC).toEpochSecond())
+	                : "null";
+	            return String.join("|",
 	                String.valueOf(fileId),
 	                epc != null ? String.valueOf(epc.getEpcId()) : "null",
 	                locationId != null ? String.valueOf(locationId) : "null",
 	                product != null ? String.valueOf(product.getProductId()) : "null",
-	                eventTime != null ? eventTime.toString() : "null",
+	                epoch,
 	                businessStep != null ? businessStep : "null",
 	                eventType != null ? eventType : "null"
-	        );
+	            );
 	    }
 
 	    private long hash64(String s) {
