@@ -26,7 +26,7 @@ public class CsvSaveBatchService {
 	private final JdbcTemplate jdbcTemplate;
 
 	// CsvLocation 배치 삽입
-	public void saveCsvLocation(List<CsvLocation> locations) {
+	public void saveCsvLocations(List<CsvLocation> locations) {
 		if (locations.isEmpty())
 			return;
 

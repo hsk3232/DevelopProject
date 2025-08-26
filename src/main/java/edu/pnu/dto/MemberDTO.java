@@ -59,7 +59,8 @@ public abstract class MemberDTO {
     @Getter 
     @Setter
     public static class IdSearchRequest {
-        private String userId;
+    	@NotBlank
+    	private String userId;
     }
 
 	// [로그인] : 회원 로그인 요청을 위한 DTO
@@ -71,7 +72,9 @@ public abstract class MemberDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class LoginRequest { // 기존 LoginDTO 역할
+		@NotBlank
 		private String userId;
+		@NotBlank
 		private String password;
 	}
 
@@ -98,7 +101,9 @@ public abstract class MemberDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class ChangePasswordRequest {
+		@NotBlank
 		private String currentPassword;
+		@NotBlank
 		private String newPassword;
 	}
 	

@@ -10,10 +10,10 @@ import edu.pnu.domain.CsvLocation;
 
 public interface CsvLocationRepository extends JpaRepository<CsvLocation, Long> {
 	// CSV 파싱 시 중복 체크를 위해 파일 내 모든 locationId를 조회
-	@Query("""
-			SELECT cl.locationId
-			FROM CsvLocation cl 
-			WHERE cl.csv.fileId = :fileId
+		
+	@Query("""			
+			SELECT cl.locationId 
+			FROM CsvLocation cl
 			""")
-	Set<Long> findAllLocationIdsByFileId(@Param("fileId") Long fileId);
+    Set<Long> findAllLocationIds();
 }

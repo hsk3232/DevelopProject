@@ -1,6 +1,8 @@
 package edu.pnu.repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +18,22 @@ public interface CsvProductRepository extends JpaRepository<CsvProduct, Long> {
     		WHERE cp.csv.fileId = :fileId
     		""")
     List<CsvProduct> findAllByFileId(@Param("fileId") Long fileId);
+    
+    // Key-Value 형태의 Map을 반환하기 위해 List<Object[]>를 먼저 조회
+    @Query("""
+    		SELECT p.epcCompany, p.epcProduct, p 
+    		FROM CsvProduct p 
+    		WHERE p.csv.fileId = :fileId
+    		""")
+    List<Object[]> findAllByFileIdForMap(@Param("fileId") Long fileId);
+
+    // Default 메서드를 사용하여 서비스 레이어의 변환 로직을 캡슐화
+    default Map<String, CsvProduct> findAllByFileIdAsMap(Long fileId) {
+        return findAllByFileIdForMap(fileId).stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0] + "|" + (String) row[1], // Key: company|product
+                        row -> (CsvProduct) row[2]
+                ));
+    }
 
 }

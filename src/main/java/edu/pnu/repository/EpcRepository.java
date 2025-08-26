@@ -1,6 +1,9 @@
 package edu.pnu.repository;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +19,22 @@ public interface EpcRepository extends JpaRepository<Epc, Long> {
     		WHERE e.csv.fileId = :fileId
     		""")
     Set<String> findAllEpcCodesByFileId(@Param("fileId") Long fileId);
+    
+    
+ //	Map 반환을 위한 쿼리
+    @Query("""
+    		SELECT e.epcCode, e 
+    		FROM Epc e 
+    		WHERE e.csv.fileId = :fileId
+    		""")
+    List<Object[]> findAllByFileIdForMap(@Param("fileId") Long fileId);
+
+    // Default 메서드를 사용하여 Map 변환 로직 캡슐화
+    default Map<String, Epc> findAllByFileIdAsMap(Long fileId) {
+        return findAllByFileIdForMap(fileId).stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0], // Key: epcCode
+                        row -> (Epc) row[1]
+                ));
+    }
 }

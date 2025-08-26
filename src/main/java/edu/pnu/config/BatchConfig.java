@@ -1,6 +1,7 @@
 package edu.pnu.config;
 
 import org.springframework.batch.core.Job;
+
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
@@ -11,8 +12,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import edu.pnu.service.BatchTriggerService;
+import edu.pnu.service.SecurityUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-@Slf4j 
+
+@Slf4j
+@RequiredArgsConstructor
 public class BatchConfig {
 	
 	private final JobRepository jobRepo; // ⭐️ batch에서 필수!
@@ -42,7 +47,7 @@ public class BatchConfig {
                         .get("fileId").toString());
 	            
 	        	log.info("[실행] : [MyBatchConfig] Step 실행됨!");
-	        	// [1] 새로운 Csv 저장되면, AnalyzedTrip 로직 저장
+	        	// [1] 새로운 Csv 저장되면, AnalyzedTsrip 로직 저장
 	        	batchTriggerService.analyzeAndSaveAllTripsBatch(fileId); 
 	        	
 	            return RepeatStatus.FINISHED;
