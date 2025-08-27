@@ -1,6 +1,7 @@
 package edu.pnu.service;
 
 import com.opencsv.CSVReader;
+import edu.pnu.config.CustomUserDetails;
 import edu.pnu.domain.Csv;
 import edu.pnu.domain.CsvLocation;
 import edu.pnu.domain.CsvProduct;
@@ -20,7 +21,6 @@ import edu.pnu.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,8 +45,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 @Slf4j
 @Service
@@ -64,11 +62,9 @@ public class CsvSaveService {
     private final MemberRepository memberRepo;
 
     private final CsvSaveBatchService csvSaveBatchService;
-    private final DataShareService dataShareService;
-    private final StatisticsAdminService statisticsAdminService;
     private final WebSocketService webSocketService;
+    private final AnalysisPipelineService analysisPipelineService;
 
-    private final Executor taskExecutor;
 
     @Value("${file.upload.dir}")
     private String fileUploadDir; // 업로드 파일 재다운로드용
@@ -79,7 +75,7 @@ public class CsvSaveService {
 
     // ■■■■■■■■■■■■■■ [ 1단계: CSV 저장/파싱 (동기) ] ■■■■■■■■■■■■■
     @Transactional
-    public Long postCsvAndTriggerAsyncProcessing(MultipartFile file, edu.pnu.config.CustomUserDetails user) {
+    public Long postCsvAndTriggerAsyncProcessing(MultipartFile file, CustomUserDetails user) {
         final String userId = user.getUserId();
         webSocketService.sendMessage(userId, "[1단계/CSV] START - 파일 업로드 시작");
 
@@ -109,7 +105,7 @@ public class CsvSaveService {
         }
 
         webSocketService.sendMessage(userId, "[1단계/CSV] DONE  - CSV 저장 및 파싱 완료. 2단계 분석 시작");
-        runAnalysisPipelineAsync(csv.getFileId(), userId);
+        analysisPipelineService.runAnalysisPipeline(csv.getFileId(), userId);
         return csv.getFileId();
     }
 
@@ -165,50 +161,6 @@ public class CsvSaveService {
             throw new RuntimeException("CSV 처리 중 오류가 발생했습니다.", e);
         }
         return errorRows;
-    }
-
-
-    @Async("taskExecutor")
-    public void runAnalysisPipelineAsync(Long fileId, String userId) {
-        try {
-            webSocketService.sendMessage(userId, "[2단계/분석] START - BE/AI 병렬 분석 시작");
-
-            // BE: 동기 메서드를 runAsync로 병렬 래핑
-            webSocketService.sendMessage(userId, "[2단계/분석] INFO  - 백엔드 규칙 분석 시작");
-            CompletableFuture<Void> beFuture =
-                    CompletableFuture.runAsync(() -> statisticsAdminService.processBeAnalysis(fileId), taskExecutor)
-                            .whenComplete((v, ex) -> webSocketService.sendMessage(
-                            userId,
-                            ex == null ? "[2단계/분석] DONE  - 백엔드 규칙 분석 완료"
-                                    : "[2단계/분석] ERROR - 백엔드 규칙 분석 실패: " + ex.getMessage()
-                    ));
-
-            // AI: 동기 메서드를 runAsync로 병렬 래핑
-            webSocketService.sendMessage(userId, "[2단계/분석] INFO  - AI 분석 시작");
-            CompletableFuture<Void> aiFuture =
-                    CompletableFuture.runAsync(() -> {
-                        dataShareService.sendAndReceiveFromAi(fileId);
-                    }, taskExecutor).whenComplete((v, ex) -> webSocketService.sendMessage(
-                            userId,
-                            ex == null ? "[2단계/분석] DONE  - AI 분석 완료"
-                                    : "[2단계/분석] ERROR - AI 분석 실패: " + ex.getMessage()
-                    ));
-
-            // 둘 다 끝날 때까지 대기
-            CompletableFuture.allOf(beFuture, aiFuture).join();
-
-            // 3단계 통계
-            webSocketService.sendMessage(userId, "[3단계/통계] START - BE/AI 결과 종합 통계 생성 시작");
-            statisticsAdminService.processTripAndSummaryStatistics(fileId);
-            webSocketService.sendMessage(userId, "[3단계/통계] DONE  - 통계 생성 완료");
-
-            webSocketService.sendMessage(userId, "[전체] DONE  - 1~3단계 전체 파이프라인 완료 ✅");
-            log.info("[완료] fileId={} 전체 파이프라인 종료", fileId);
-
-        } catch (Exception e) {
-            webSocketService.sendMessage(userId, "[전체] ERROR - 파이프라인 오류: " + e.getMessage());
-            log.error("[오류] fileId={} 파이프라인 오류", fileId, e);
-        }
     }
 
 
