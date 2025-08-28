@@ -15,7 +15,6 @@ import java.util.List;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,29 +23,24 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CsvLogService {
     private final CsvRepository csvRepository;
-    
+
 
     @Transactional(readOnly = true)
     public CsvFileDTO.FileListResponse getFileListByCursor(Long cursor, int size, String search, Long locationId) {
-        PageRequest pageable = PageRequest.of(0, size, Sort.by(Sort.Direction.DESC, "fileId"));
 
-        List<Csv> csvList;
-        // 검색어 유무와 커서 유무에 따라 적절한 Repository 메서드 호출 (Repository 수정 필요)
-        if (search != null && !search.isBlank()) {
-            csvList = (cursor == null)
-                    ? csvRepository.findByMember_Location_LocationIdAndFileNameContainingIgnoreCaseOrderByFileIdDesc(locationId, search, pageable)
-                    : csvRepository.findByMember_Location_LocationIdAndFileIdLessThanAndFileNameContainingIgnoreCaseOrderByFileIdDesc(locationId, cursor, search, pageable);
-        } else {
-            csvList = (cursor == null)
-                    ? csvRepository.findByMember_Location_LocationIdOrderByFileIdDesc(locationId, pageable)
-                    : csvRepository.findByMember_Location_LocationIdAndFileIdLessThanOrderByFileIdDesc(locationId, cursor, pageable);
-        }
+        // 커서 기반 페이징에서는 항상 첫 번째 페이지(0)를 조회
+        PageRequest pageable = PageRequest.of(0, size);
+
+
+        // findCsvListByCriteria 메서드를 호출하여 List<Csv> 타입의 csvList 변수에 결과를 할당
+        List<Csv> csvList = csvRepository.findCsvListByCriteria(locationId, cursor, search, pageable);
 
         Long nextCursor = null;
         if (!csvList.isEmpty() && csvList.size() == size) {
             nextCursor = csvList.get(csvList.size() - 1).getFileId();
         }
 
+        // CsvFileDTO의 정적 팩토리 메서드를 사용하여 최종 응답 DTO를 생성
         return CsvFileDTO.FileListResponse.from(csvList, nextCursor);
     }
 

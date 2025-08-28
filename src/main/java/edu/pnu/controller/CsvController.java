@@ -1,5 +1,15 @@
 package edu.pnu.controller;
 
+import edu.pnu.config.CustomUserDetails;
+import edu.pnu.dto.CsvFileDTO;
+import edu.pnu.service.AnalysisPipelineService;
+import edu.pnu.service.CsvLogService;
+import edu.pnu.service.CsvSaveService;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -19,16 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-
-import edu.pnu.config.CustomUserDetails;
-import edu.pnu.dto.CsvFileDTO;
-import edu.pnu.service.AnalysisPipelineService;
-import edu.pnu.service.CsvLogService;
-import edu.pnu.service.CsvSaveService;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
@@ -104,13 +104,12 @@ public class CsvController {
             @AuthenticationPrincipal CustomUserDetails user) {
 
         log.info("[API-REQ] 분석 재요청 - user: {}, fileId: {}", user.getUsername(), fileId);
+        analysisPipelineService.runAnalysisPipeline(fileId, user.getUserId());
 
         try {
-            analysisPipelineService.runAnalysisPipeline(fileId, user.getUserId());
             // 기존 응답과 동일하게 String 반환
             return ResponseEntity.ok("AI 모듈로 재전송 성공!");
         } catch (Exception e) {
-            // 기존 코드의 에러 처리 방식을 최대한 따름
             // 실제로는 GlobalExceptionHandler에서 처리하는 것이 더 좋음
             log.error("[오류] : [CsvController] 재전송 오류", e);
             throw new ResponseStatusException(
