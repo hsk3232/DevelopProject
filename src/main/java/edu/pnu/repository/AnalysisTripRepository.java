@@ -1,9 +1,11 @@
 package edu.pnu.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import edu.pnu.domain.AnalysisTrip;
 
-public interface AnalysisTripRepository extends JpaRepository<AnalysisTrip, Long> {
+import java.util.stream.Stream;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AnalysisTripRepository extends JpaRepository<AnalysisTrip, Long> {
+    Stream<AnalysisTrip> streamByEpc_Csv_FileId(Long fileId);
 }

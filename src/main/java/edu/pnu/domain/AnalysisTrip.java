@@ -1,7 +1,5 @@
 package edu.pnu.domain;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,14 +16,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor @Builder
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString(exclude = "epc")
 @Entity
 @Table(name = "analysistrips")
 public class AnalysisTrip {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trip_id")
     private Long tripId;
@@ -44,7 +47,7 @@ public class AnalysisTrip {
     private String toBusinessStep;
     private LocalDateTime fromEventTime;
     private LocalDateTime toEventTime;
-    
+
     // 이 경로가 어떤 이벤트(도착점 기준)와 관련된 이상을 포함하는지 여부
     @Builder.Default
     private boolean hasAnomaly = false;
