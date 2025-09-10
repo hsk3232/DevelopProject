@@ -2,15 +2,16 @@ package edu.pnu.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
+
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DataShareService {
+public class AiAnalysisService {
 
     public void sendAndReceiveFromAi(Long fileId) {
         // TODO Auto-generated method stub

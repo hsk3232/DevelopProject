@@ -13,13 +13,14 @@ import org.springframework.data.repository.query.Param;
 
 public interface CsvRepository extends JpaRepository<Csv, Long> {
     @Query("""
-                SELECT c FROM Csv c
+                SELECT c
+                FROM Csv c
+                JOIN FETCH c.member m
                 WHERE
-                    c.member.assetLocation.locationId = :locationId
+                    m.assetLocation.locationId = :locationId
                     AND (:cursor IS NULL OR c.fileId < :cursor)
                     AND (:search IS NULL OR LOWER(c.fileName) LIKE LOWER(CONCAT('%', :search, '%')))
-                ORDER BY
-                    c.fileId DESC
+                ORDER BY c.fileId DESC
             """)
     List<Csv> findCsvListByCriteria(
             @Param("locationId") Long locationId,

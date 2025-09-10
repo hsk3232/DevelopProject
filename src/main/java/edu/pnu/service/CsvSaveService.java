@@ -1,6 +1,5 @@
 package edu.pnu.service;
 
-import com.opencsv.CSVReader;
 import edu.pnu.config.CustomUserDetails;
 import edu.pnu.domain.Csv;
 import edu.pnu.domain.CsvLocation;
@@ -20,10 +19,6 @@ import edu.pnu.repository.EpcRepository;
 import edu.pnu.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,6 +40,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import com.opencsv.CSVReader;
 
 @Slf4j
 @Service
@@ -81,11 +82,14 @@ public class CsvSaveService {
 
         final Member member = memberRepo.findByUserId(userId)
                 .orElseThrow(() -> new BadRequestException("회원 정보를 찾을 수 없습니다."));
+
+        // [file 확장자 검사] .csv 여부 확인
         validateFile(file);
 
         final Csv csv = createAndSaveCsvMetadata(file, member);
         webSocketService.sendMessage(userId, "[1단계/CSV] INFO  - 메타데이터 저장 완료 (fileId=" + csv.getFileId() + ")");
 
+        // [CSV Meta 정보 저장]
         storeFileToDisk(file, csv);
         webSocketService.sendMessage(userId, "[1단계/CSV] INFO  - 디스크 저장 완료: " + csv.getSavedFileName());
 
@@ -97,7 +101,8 @@ public class CsvSaveService {
         );
 
         webSocketService.sendMessage(userId, "[1단계/CSV] INFO  - 파싱 준비 완료. 청크 처리 시작");
-        final Map<String, List<Integer>> errorRows = parseAndProcessFile(csv, cache, userId); // ← userId 전달
+        // [errorRows] 오류 Row
+        final Map<String, List<Integer>> errorRows = parseAndProcessFile(csv, cache, userId);
 
         if (!errorRows.isEmpty()) {
             int total = errorRows.values().stream().mapToInt(List::size).sum();
@@ -105,6 +110,7 @@ public class CsvSaveService {
         }
 
         webSocketService.sendMessage(userId, "[1단계/CSV] DONE  - CSV 저장 및 파싱 완료. 2단계 분석 시작");
+        // [분석 및 통계 파이프라인] 호출
         analysisPipelineService.runAnalysisPipeline(csv.getFileId(), userId);
         return csv.getFileId();
     }
@@ -295,7 +301,7 @@ public class CsvSaveService {
 
     // ■■■■■■■■■■■■■■ [ Helper ] ■■■■■■■■■■■■■
 
-    // 확장자 검사
+    // [file 확장자 검사] .csv 여부 확인
     private void validateFile(MultipartFile file) {
         if (file == null || file.isEmpty()) throw new CsvFileNotFoundException("업로드된 파일이 없습니다.");
         String name = Objects.requireNonNull(file.getOriginalFilename()).toLowerCase();
@@ -304,6 +310,7 @@ public class CsvSaveService {
         }
     }
 
+    // [CSV Meta 정보 저장]
     private Csv createAndSaveCsvMetadata(MultipartFile file, Member member) {
         String originalFileName = file.getOriginalFilename();
         String savedFileName = UUID.randomUUID() + ".csv";
@@ -317,6 +324,7 @@ public class CsvSaveService {
         return csvRepo.save(csv);
     }
 
+    // [파일 저장] Csv 파일 BE 서버에 저장
     private void storeFileToDisk(MultipartFile file, Csv csv) {
         try {
             Path targetLocation = Paths.get(fileUploadDir).resolve(csv.getSavedFileName());

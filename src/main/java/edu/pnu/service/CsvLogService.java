@@ -44,6 +44,7 @@ public class CsvLogService {
         return CsvFileDTO.FileListResponse.from(csvList, nextCursor);
     }
 
+    // 업로한 CSV 파일 재다운 로드
     public Resource loadCsvResource(Long fileId) {
         Csv csv = findCsvById(fileId);
         try {
@@ -59,10 +60,12 @@ public class CsvLogService {
         }
     }
 
+    // 저장된 파일 이름 검색
     public String getOriginalFilename(Long fileId) {
         return findCsvById(fileId).getFileName();
     }
 
+    // file ID 검색
     private Csv findCsvById(Long fileId) {
         return csvRepository.findById(fileId)
                 .orElseThrow(() -> new CsvFileNotFoundException("요청된 파일 ID를 찾을 수 없습니다: " + fileId));
