@@ -1,6 +1,6 @@
 package edu.pnu.config;
 
-import edu.pnu.service.SecurityUserDetailsService;
+import edu.pnu.service.security.SecurityUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

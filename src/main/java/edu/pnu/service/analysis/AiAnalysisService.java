@@ -1,4 +1,4 @@
-package edu.pnu.service;
+package edu.pnu.service.analysis;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package edu.pnu.service;
+package edu.pnu.service.analysis;
 
 import edu.pnu.domain.AnalysisTrip;
 import edu.pnu.domain.EventHistory;

@@ -1,4 +1,4 @@
-package edu.pnu.service;
+package edu.pnu.service.csv;
 
 import edu.pnu.config.CustomUserDetails;
 import edu.pnu.domain.Csv;
@@ -17,6 +17,8 @@ import edu.pnu.repository.CsvProductRepository;
 import edu.pnu.repository.CsvRepository;
 import edu.pnu.repository.EpcRepository;
 import edu.pnu.repository.MemberRepository;
+import edu.pnu.service.analysis.AnalysisPipelineService;
+import edu.pnu.service.messaging.WebSocketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -115,7 +117,7 @@ public class CsvSaveService {
         return csv.getFileId();
     }
 
-    // ■■■■■■■■■■■■■■ [ 2~4단계: 비동기 분석 파이프라인 ] ■■■■■■■■■■■■■
+    // ■■■■■■■■■■■■■■ [ 2~4단계: 동기 저장 ] ■■■■■■■■■■■■■
 
     private Map<String, List<Integer>> parseAndProcessFile(Csv csv, ImportCache cache, String userId) {
         final Map<String, List<Integer>> errorRows = new HashMap<>();

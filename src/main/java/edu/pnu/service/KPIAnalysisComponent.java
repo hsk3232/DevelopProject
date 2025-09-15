@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class KPIAnalysisComponet implements StatisticsInterface {
+public class KPIAnalysisComponent implements StatisticsInterface {
     private final AnalysisSummaryRepository analysisSummaryRepo;
     private final AnalysisTripRepository analysisTripRepo;
     private final AiAnalysisRepository aiAnalysisRepo;

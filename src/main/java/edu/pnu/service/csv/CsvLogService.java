@@ -1,4 +1,4 @@
-package edu.pnu.service;
+package edu.pnu.service.csv;
 
 import edu.pnu.domain.Csv;
 import edu.pnu.dto.CsvFileDTO;

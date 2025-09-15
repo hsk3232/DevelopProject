@@ -1,5 +1,6 @@
 package edu.pnu.service;
 
+import edu.pnu.service.messaging.WebSocketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

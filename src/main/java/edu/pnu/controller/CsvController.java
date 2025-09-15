@@ -2,9 +2,9 @@ package edu.pnu.controller;
 
 import edu.pnu.config.CustomUserDetails;
 import edu.pnu.dto.CsvFileDTO;
-import edu.pnu.service.AnalysisPipelineService;
-import edu.pnu.service.CsvLogService;
-import edu.pnu.service.CsvSaveService;
+import edu.pnu.service.analysis.AnalysisPipelineService;
+import edu.pnu.service.csv.CsvLogService;
+import edu.pnu.service.csv.CsvSaveService;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
