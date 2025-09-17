@@ -33,14 +33,14 @@ public class AnalysisTripService {
 
     @Transactional
     public void generateTripsForFile(Long fileId) {
-        log.info("[시작] fileId={}의 AnalysisTrip 생성을 시작합니다.", fileId);
+        log.info("[시작] : [AnalysisTripService] fileId={}의 AnalysisTrip 생성 시작", fileId);
 
         final int[] totalSavedCount = {0};
         // 이전 이벤트를 추적하기 위한 상태 변수. EPC가 바뀔 때마다 초기화됨.
         final EventHistory[] previousEventContainer = new EventHistory[1];
         List<AnalysisTrip> tripBatch = new ArrayList<>(BATCH_SIZE);
 
-        log.debug("EventHistory 스트림 조회를 시작합니다...");
+        log.debug("EventHistory 스트림 조회를 시작");
         // try-with-resources 구문으로 안전하게 스트림을 사용
         try (Stream<EventHistory> eventStream = eventHistoryRepo.streamWithDetailsByFileId(fileId)) {
 
@@ -82,7 +82,7 @@ public class AnalysisTripService {
                 saveBatchAndClear(tripBatch, totalSavedCount);
             }
         }
-        log.info("[완료] fileId={}의 AnalysisTrip 생성 완료. (총 저장 건수: {}건)", fileId, totalSavedCount[0]);
+        log.info("[완료] : [AnalysisTripService] fileId={}의 AnalysisTrip 생성 완료. (총 저장 건수: {}건)", fileId, totalSavedCount[0]);
     }
 
     // JPA를 이용한 배치 저장 및 영속성 컨텍스트 관리 헬퍼 메서드
@@ -91,7 +91,7 @@ public class AnalysisTripService {
         analysisTripRepo.flush();
         entityManager.clear();
         total[0] += trips.size();
-        log.info("[진행] {}건 저장 (누적: {}건)", trips.size(), total[0]);
+        log.debug("[진행] : [AnalysisTripService] {}건 저장 (누적: {}건)", trips.size(), total[0]);
         trips.clear();
     }
 }

@@ -7,6 +7,7 @@ import edu.pnu.domain.CsvProduct;
 import edu.pnu.domain.Epc;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.domain.Member;
+import edu.pnu.events.DbSavedEvent;
 import edu.pnu.exception.BadRequestException;
 import edu.pnu.exception.CsvFileNotFoundException;
 import edu.pnu.exception.CsvFileSaveToDiskException;
@@ -17,7 +18,6 @@ import edu.pnu.repository.CsvProductRepository;
 import edu.pnu.repository.CsvRepository;
 import edu.pnu.repository.EpcRepository;
 import edu.pnu.repository.MemberRepository;
-import edu.pnu.service.analysis.AnalysisPipelineService;
 import edu.pnu.service.messaging.WebSocketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +44,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,8 +67,8 @@ public class CsvSaveService {
 
     private final CsvSaveJdbcService csvSaveJdbcService;
     private final WebSocketService webSocketService;
-    private final AnalysisPipelineService analysisPipelineService;
-
+    // private final AnalysisPipelineService analysisPipelineService;
+    private final ApplicationEventPublisher publisher;
 
     @Value("${file.upload.dir}")
     private String fileUploadDir; // 업로드 파일 재다운로드용
@@ -113,7 +114,8 @@ public class CsvSaveService {
 
         webSocketService.sendMessage(userId, "[1단계/CSV] DONE  - CSV 저장 및 파싱 완료. 2단계 분석 시작");
         // [분석 및 통계 파이프라인] 호출
-        analysisPipelineService.runAnalysisPipeline(csv.getFileId(), userId);
+        // analysisPipelineService.runAnalysisPipeline(csv.getFileId(), userId);
+        publisher.publishEvent(new DbSavedEvent(csv.getFileId()));
         return csv.getFileId();
     }
 
