@@ -1,6 +1,6 @@
 package edu.pnu.config;
 
-import edu.pnu.service.analysis.AnalysisTripService;
+import edu.pnu.service.analysis.trips.AnalysisTripService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

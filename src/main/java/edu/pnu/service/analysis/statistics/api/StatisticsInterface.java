@@ -1,4 +1,4 @@
-package edu.pnu.service;
+package edu.pnu.service.analysis.statistics.api;
 
 public interface StatisticsInterface {
     String getProcessorName();

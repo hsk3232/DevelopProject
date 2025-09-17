@@ -1,4 +1,4 @@
-package edu.pnu.service.analysis;
+package edu.pnu.service.analysis.trips;
 
 import edu.pnu.domain.AnalysisTrip;
 import edu.pnu.domain.EventHistory;
@@ -19,7 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class AnalysisTripService {
-
+    /*
+     * [이동 경로 DB] 생성
+     * [AnalysisTrips] AI 및 BE 경로 이상 탐지에 활용할 DB
+     * 업로드한 Csv파일을 파싱/저장이 완료되면,
+     * Batch Job을 활용해 저장된 Csv DB 속 이동경로를
+     * From, To 형식으로 DB화함.
+     * */
     private static final int BATCH_SIZE = 1000; // 배치 크기
     private final AnalysisTripRepository analysisTripRepo;
     private final EventHistoryRepository eventHistoryRepo;

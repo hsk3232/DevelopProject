@@ -1,4 +1,4 @@
-package edu.pnu.service;
+package edu.pnu.service.analysis.statistics.process;
 
 import edu.pnu.domain.AnalysisSummary;
 import edu.pnu.domain.AnalysisTrip;
@@ -9,6 +9,7 @@ import edu.pnu.repository.AnalysisSummaryRepository;
 import edu.pnu.repository.AnalysisTripRepository;
 import edu.pnu.repository.BeAnalysisRepository;
 import edu.pnu.repository.CsvRepository;
+import edu.pnu.service.analysis.statistics.api.StatisticsInterface;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class KPIAnalysisComponent implements StatisticsInterface {
+public class KPIAnalysisProcess implements StatisticsInterface {
     private final AnalysisSummaryRepository analysisSummaryRepo;
     private final AnalysisTripRepository analysisTripRepo;
     private final AiAnalysisRepository aiAnalysisRepo;
@@ -35,7 +36,7 @@ public class KPIAnalysisComponent implements StatisticsInterface {
 
     @Override
     public int getOrder() {
-        return 1;
+        return 2;
     }
 
     @Override

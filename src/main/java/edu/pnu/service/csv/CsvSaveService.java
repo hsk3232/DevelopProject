@@ -64,7 +64,7 @@ public class CsvSaveService {
     private final EpcRepository epcRepo;
     private final MemberRepository memberRepo;
 
-    private final CsvSaveBatchService csvSaveBatchService;
+    private final CsvSaveJdbcService csvSaveJdbcService;
     private final WebSocketService webSocketService;
     private final AnalysisPipelineService analysisPipelineService;
 
@@ -237,10 +237,10 @@ public class CsvSaveService {
             }
         }
 
-        // 2) 배치 저장 (REQUIRES_NEW 권장: CsvSaveBatchService 내부에서 처리)
-        if (!newLocations.isEmpty()) csvSaveBatchService.saveCsvLocations(newLocations);
-        if (!newProducts.isEmpty()) csvSaveBatchService.saveCsvProducts(newProducts);
-        if (!newEpcs.isEmpty()) csvSaveBatchService.saveEpcs(newEpcs);
+        // 2) 배치 저장 (REQUIRES_NEW 권장: CsvSaveJdbcService 내부에서 처리)
+        if (!newLocations.isEmpty()) csvSaveJdbcService.saveCsvLocations(newLocations);
+        if (!newProducts.isEmpty()) csvSaveJdbcService.saveCsvProducts(newProducts);
+        if (!newEpcs.isEmpty()) csvSaveJdbcService.saveEpcs(newEpcs);
 
         // 저장 완료된 엔티티로 캐시 확정(신규만 반영)
         for (CsvProduct p : newProducts) {
@@ -298,7 +298,7 @@ public class CsvSaveService {
             }
         }
 
-        if (!newEvents.isEmpty()) csvSaveBatchService.saveEventHistories(newEvents);
+        if (!newEvents.isEmpty()) csvSaveJdbcService.saveEventHistories(newEvents);
     }
 
     // ■■■■■■■■■■■■■■ [ Helper ] ■■■■■■■■■■■■■

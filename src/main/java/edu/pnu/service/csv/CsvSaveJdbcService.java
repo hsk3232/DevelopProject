@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CsvSaveBatchService {
+public class CsvSaveJdbcService {
 
     // JdbcTemplate을 사용해 엔티티들을 고속으로 배치 삽입
     private final JdbcTemplate jdbcTemplate;
