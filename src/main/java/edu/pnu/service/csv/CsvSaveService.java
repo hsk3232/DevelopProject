@@ -112,10 +112,11 @@ public class CsvSaveService {
             webSocketService.sendMessage(userId, "[1단계/CSV] WARN  - 파싱 오류 라인 " + total + "건 (세부는 서버 로그)");
         }
 
-        webSocketService.sendMessage(userId, "[1단계/CSV] DONE  - CSV 저장 및 파싱 완료. 2단계 분석 시작");
         // [분석 및 통계 파이프라인] 호출
         // analysisPipelineService.runAnalysisPipeline(csv.getFileId(), userId);
+        //BatchTriggerEvent 생성
         publisher.publishEvent(new DbSavedEvent(csv.getFileId()));
+        webSocketService.sendMessage(userId, "[1단계/CSV] DONE  - CSV 저장 및 파싱 완료. 2단계 분석 시작");
         return csv.getFileId();
     }
 
