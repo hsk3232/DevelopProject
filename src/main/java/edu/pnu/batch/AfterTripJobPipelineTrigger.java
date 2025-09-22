@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AnalyzedTripJobListener implements JobExecutionListener {
+public class AfterTripJobPipelineTrigger implements JobExecutionListener {
     private final AnalysisPipelineService analysisPipelineService;
     private final CsvRepository csvRepository;
 
     @Override
     public void afterJob(JobExecution jobExecution) {
         // 이 리스너가 다른 잡에도 붙을 수 있으니 이름 확인(안전)
-        if (!"analyzedTripBatchJob".equals(jobExecution.getJobInstance().getJobName())) return;
+        if (!"tripBuildJob".equals(jobExecution.getJobInstance().getJobName())) return;
 
         if (jobExecution.getStatus() != BatchStatus.COMPLETED) return;
 

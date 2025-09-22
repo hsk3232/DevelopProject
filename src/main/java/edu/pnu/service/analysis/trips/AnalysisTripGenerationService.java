@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AnalysisTripService {
+public class AnalysisTripGenerationService {
     /*
      * [이동 경로 DB] 생성
      * [AnalysisTrips] AI 및 BE 경로 이상 탐지에 활용할 DB
