@@ -31,10 +31,9 @@ public interface EventHistoryRepository extends JpaRepository<EventHistory, Long
             """)
     List<EventHistory> findAllWithDetailsByFileId(@Param("fileId") Long fileId);
 
-    /**
-     * fileId에 해당하는 모든 EventHistory를 스트림으로 조회
-     * N+1 문제를 방지하기 위해 Epc와 CsvLocation 엔티티를 함께 fetch join
-     */
+
+    // fileId에 해당하는 모든 EventHistory를 스트림으로 조회
+    // N+1 문제를 방지하기 위해 Epc와 CsvLocation 엔티티를 함께 fetch join
     @Query("SELECT eh FROM EventHistory eh " +
             "JOIN FETCH eh.epc " + // eh와 연관된 epc를 즉시 로딩
             "JOIN FETCH eh.csvLocation " + // eh와 연관된 csvLocation을 즉시 로딩
@@ -43,4 +42,13 @@ public interface EventHistoryRepository extends JpaRepository<EventHistory, Long
     Stream<EventHistory> streamWithDetailsByFileId(@Param("fileId") Long fileId);
 
 
+    @Query("""
+        SELECT eh
+        FROM EventHistory eh
+        JOIN FETCH eh.epc e
+        JOIN FETCH eh.csvLocation l
+        WHERE eh.csv.fileId = :fileId
+        ORDER BY e.epcId, eh.eventTime
+        """)
+    List<EventHistory> findAllByCsv_FileIdForAiExport(@Param("fileId") Long fileId);
 }
