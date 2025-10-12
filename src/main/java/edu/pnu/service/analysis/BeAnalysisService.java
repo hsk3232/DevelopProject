@@ -53,7 +53,8 @@ public class BeAnalysisService {
 
         // 1. AssetRoute에서 모든 정상 경로 정보를 조회하여 Set으로 변환 (빠른 조회를 위함)
         Set<String> validRoutes = assetRouteRepo.findAll().stream()
-                .map(route -> route.getFromLocationId().getLocationId() + "->" + route.getToLocationId().getLocationId())
+                .map(route -> route.getFromLocationId().getLocationId()
+                        + "->" + route.getToLocationId().getLocationId())
                 .collect(Collectors.toSet());
 
         if (validRoutes.isEmpty()) {

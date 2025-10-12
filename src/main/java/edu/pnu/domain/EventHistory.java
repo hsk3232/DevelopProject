@@ -1,7 +1,5 @@
 package edu.pnu.domain;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,6 +18,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
@@ -48,16 +48,14 @@ public class EventHistory {
 
   // 파일 스코프 기준 키 (필수)
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "file_id", nullable = false)
+  @JoinColumn(name = "file_id", nullable = false, insertable = false, updatable = false)
   private Csv csv;
 
   // ★ 유일한 '복합 FK' 한 곳: (file_id, epc_id) -> epc(file_id, epc_id)
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumns({
-    @JoinColumn(name = "file_id", referencedColumnName = "file_id",
-                insertable = false, updatable = false, nullable = false),
-    @JoinColumn(name = "epc_id",  referencedColumnName = "epc_id",
-                nullable = false)
+          @JoinColumn(name = "file_id", referencedColumnName = "file_id", nullable = false),
+          @JoinColumn(name = "epc_id",  referencedColumnName = "epc_id",  nullable = false)
   })
   private Epc epc;
 
