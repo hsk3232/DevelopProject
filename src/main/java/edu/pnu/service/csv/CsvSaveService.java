@@ -81,6 +81,7 @@ public class CsvSaveService {
     @Transactional
     public Long postCsvAndTriggerAsyncProcessing(MultipartFile file, CustomUserDetails user) {
         final String userId = user.getUserId();
+        log.debug("[1] [CsvSaveService] [진입] : CsvSaveService 진입 성공 / 업로더 = {}", userId);
         webSocketService.sendMessage(userId, "[1단계/CSV] START - 파일 업로드 시작");
 
         final Member member = memberRepo.findByUserId(userId)
@@ -114,7 +115,7 @@ public class CsvSaveService {
 
         // [분석 및 통계 파이프라인] 호출
         // analysisPipelineService.runAnalysisPipeline(csv.getFileId(), userId);
-        //BatchTriggerEvent 생성
+        // BatchTriggerEvent 생성
         publisher.publishEvent(new DbSavedEvent(csv.getFileId()));
         webSocketService.sendMessage(userId, "[1단계/CSV] DONE  - CSV 저장 및 파싱 완료. 2단계 분석 시작");
         return csv.getFileId();
@@ -127,6 +128,8 @@ public class CsvSaveService {
         final Path path = Paths.get(fileUploadDir, csv.getSavedFileName());
 
         long processed = 0L;
+
+        log.debug("[5] [CsvSaveService] [진입] : [parseAndProcessFile] 파싱 프로세스 진입 성공");
 
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
              CSVReader csvReader = new com.opencsv.CSVReaderBuilder(reader)
@@ -308,15 +311,22 @@ public class CsvSaveService {
 
     // [file 확장자 검사] .csv 여부 확인
     private void validateFile(MultipartFile file) {
-        if (file == null || file.isEmpty()) throw new CsvFileNotFoundException("업로드된 파일이 없습니다.");
+        log.debug("[2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사");
+        if (file == null || file.isEmpty())
+            throw new CsvFileNotFoundException("업로드된 파일이 없습니다.");
         String name = Objects.requireNonNull(file.getOriginalFilename()).toLowerCase();
         if (!name.endsWith(".csv")) {
             throw new FileUploadException("CSV 파일 형식이 아닙니다.");
         }
+
+
+
+        log.debug("[2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사 완료");
     }
 
     // [CSV Meta 정보 저장]
     private Csv createAndSaveCsvMetadata(MultipartFile file, Member member) {
+        log.debug("[3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 진입");
         String originalFileName = file.getOriginalFilename();
         String savedFileName = UUID.randomUUID() + ".csv";
         Csv csv = Csv.builder()
@@ -326,23 +336,27 @@ public class CsvSaveService {
                 .fileSize(file.getSize())
                 .member(member)
                 .build();
+        log.debug("[3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 성공, originalFileName = {}", originalFileName);
         return csvRepo.save(csv);
     }
 
     // [파일 저장] Csv 파일 BE 서버에 저장
     private void storeFileToDisk(MultipartFile file, Csv csv) {
         try {
+            log.debug("[4] [CsvSaveService] [진입] : [storeFileToDisk] BE 서버에 저장 진입");
             Path targetLocation = Paths.get(fileUploadDir).resolve(csv.getSavedFileName());
             Files.createDirectories(targetLocation.getParent());
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            log.debug("[4] [CsvSaveService] [완료] : [storeFileToDisk] BE 서버에 저장 완료");
         } catch (IOException e) {
-            log.error("파일 저장 실패: {}", csv.getSavedFileName(), e);
+            log.error("[4] [CsvSaveService] [진입] : [storeFileToDisk] 파일 저장 실패: {}", csv.getSavedFileName(), e);
             throw new CsvFileSaveToDiskException("파일을 디스크에 저장하는 데 실패했습니다.");
         }
     }
 
     private Map<String, Integer> getColumnIndexMap(String[] header) {
-        if (header == null) throw new InvalidCsvFormatException("CSV 파일에 헤더가 없습니다.");
+        if (header == null)
+            throw new InvalidCsvFormatException("CSV 파일에 헤더가 없습니다.");
         Map<String, Integer> colIdx = new HashMap<>(header.length * 2);
         for (int i = 0; i < header.length; i++) {
             colIdx.put(header[i].trim().toLowerCase(), i);
