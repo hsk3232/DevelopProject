@@ -35,6 +35,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +43,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -186,7 +188,7 @@ public class CsvSaveService {
                               int startRowNum,
                               ImportCache cache,
                               Set<Long> seenEventKeys) {
-
+        log.debug("[진입] : [processChunk] 청크 처리를 위한 private 메서드 진입");
         List<CsvLocation> newLocations = new ArrayList<>();
         List<CsvProduct> newProducts = new ArrayList<>();
         List<Epc> newEpcs = new ArrayList<>();
@@ -359,8 +361,25 @@ public class CsvSaveService {
             throw new InvalidCsvFormatException("CSV 파일에 헤더가 없습니다.");
         Map<String, Integer> colIdx = new HashMap<>(header.length * 2);
         for (int i = 0; i < header.length; i++) {
-            colIdx.put(header[i].trim().toLowerCase(), i);
+            String h = header[i];
+            if (h == null) continue;                    // ← null 방어
+            String key = h.trim().toLowerCase();
+            if (key.isEmpty()) continue;                // ← 빈 헤더 스킵
+            colIdx.put(key, i);
         }
+        List<String> required = Arrays.asList(
+                "location_id","scan_location","operator_id","device_id",
+                "epc_code","epc_header","epc_lot","epc_serial",
+                "epc_product","epc_company","product_name",
+                "event_time","business_step","event_type","hub_type"
+        );
+        List<String> missing = required.stream()
+                .filter(r -> !colIdx.containsKey(r))
+                .collect(Collectors.toList());
+        if (!missing.isEmpty()) {
+            throw new InvalidCsvFormatException("누락된 헤더: " + missing);
+        }
+
         return colIdx;
     }
 

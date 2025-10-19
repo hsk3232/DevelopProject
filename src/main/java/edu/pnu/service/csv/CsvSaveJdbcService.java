@@ -50,7 +50,7 @@ public class CsvSaveJdbcService {
                 return locations.size();
             }
         });
-        log.debug("[성공] : [CsvSaveJdbcService] Location batch insert 완료! 저장 건수: {}", locations.size());
+        log.debug("[CsvSaveJdbcService] [성공] :  [saveCsvLocations] Location batch insert 완료! 저장 건수: {}", locations.size());
     }
 
     // CsvProduct 배치 삽입
@@ -77,7 +77,7 @@ public class CsvSaveJdbcService {
             }
         });
 
-        log.debug("[성공] : [CsvSaveJdbcService] Product batch insert 완료! 저장 건수: {}", products.size());
+        log.debug("[CsvSaveJdbcService] [성공] : [saveCsvProducts] Product batch insert 완료! 저장 건수: {}", products.size());
     }
 
     // Epc 배치 삽입
@@ -104,7 +104,7 @@ public class CsvSaveJdbcService {
                 return epcs.size();
             }
         });
-        log.debug("[성공] : [CsvSaveJdbcService] Epc batch insert 완료! 저장 건수: {}", epcs.size());
+        log.debug("[CsvSaveJdbcService] [성공] : [saveEpcs] Epc batch insert 완료! 저장 건수: {}", epcs.size());
     }
 
     // EventHistory 배치 삽입
@@ -136,7 +136,7 @@ public class CsvSaveJdbcService {
                 return events.size();
             }
         });
-        log.debug("[성공] : [CsvSaveBatchService] EventHistory batch insert 완료! 저장 건수: {}, ID 설정 완료", events.size());
+        log.debug("[CsvSaveBatchService] [성공] : [saveEventHistories] EventHistory batch insert 완료! 저장 건수: {}, ID 설정 완료", events.size());
     }
 
 }
