@@ -310,3 +310,311 @@
 2025-10-20T00:20:47.803+09:00  INFO 18944 --- [DevelopProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-10-20T00:20:47.803+09:00  INFO 18944 --- [DevelopProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-10-20T00:20:47.815+09:00  INFO 18944 --- [DevelopProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-20T12:16:11.001+09:00  INFO 18652 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : Starting DevelopProjectApplication using Java 17.0.12 with PID 18652 (C:\Users\9191h\Documents\GitHub\DevelopProject\target\classes started by 9191h in C:\Users\9191h\Documents\GitHub\DevelopProject)
+2025-10-20T12:16:11.004+09:00  INFO 18652 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T12:16:12.360+09:00  INFO 18652 --- [DevelopProject] [main] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 12 ms.
+2025-10-20T12:16:12.982+09:00  INFO 18652 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T12:16:13.134+09:00  INFO 18652 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 134 ms. Found 13 JPA repository interfaces.
+2025-10-20T12:16:13.951+09:00  INFO 18652 --- [DevelopProject] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-20T12:16:13.967+09:00  INFO 18652 --- [DevelopProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T12:16:13.968+09:00  INFO 18652 --- [DevelopProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-10-20T12:16:14.034+09:00  INFO 18652 --- [DevelopProject] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-20T12:16:14.035+09:00  INFO 18652 --- [DevelopProject] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2950 ms
+2025-10-20T12:16:14.250+09:00  INFO 18652 --- [DevelopProject] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T12:16:14.341+09:00  INFO 18652 --- [DevelopProject] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-10-20T12:16:14.385+09:00  INFO 18652 --- [DevelopProject] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-20T12:16:14.738+09:00  INFO 18652 --- [DevelopProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T12:16:14.773+09:00  INFO 18652 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-20T12:16:15.244+09:00  INFO 18652 --- [DevelopProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3245efdb
+2025-10-20T12:16:15.246+09:00  INFO 18652 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-20T12:16:15.319+09:00  WARN 18652 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-20T12:16:15.320+09:00  WARN 18652 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-20T12:16:15.348+09:00  INFO 18652 --- [DevelopProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-20T12:16:17.029+09:00  INFO 18652 --- [DevelopProject] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-20T12:16:17.254+09:00  INFO 18652 --- [DevelopProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T12:16:17.547+09:00  INFO 18652 --- [DevelopProject] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-10-20T12:16:18.911+09:00  INFO 18652 --- [DevelopProject] [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+2025-10-20T12:16:18.953+09:00  INFO 18652 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-10-20T12:16:18.960+09:00  INFO 18652 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-10-20T12:16:19.259+09:00  WARN 18652 --- [DevelopProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-20T12:16:19.305+09:00  INFO 18652 --- [DevelopProject] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name securityUserDetailsService
+2025-10-20T12:16:19.425+09:00  INFO 18652 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [진입] : [WebSocketConfig] WebSocket 엔드포인트 설정을 시작합니다.
+2025-10-20T12:16:19.433+09:00  INFO 18652 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [완료] : [WebSocketConfig] '/webSocket' 엔드포인트가 설정되었습니다.
+2025-10-20T12:16:19.463+09:00 DEBUG 18652 --- [DevelopProject] [main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/webSocket/**] in 'stompWebSocketHandlerMapping'
+2025-10-20T12:16:19.577+09:00 DEBUG 18652 --- [DevelopProject] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 10 mappings in 'requestMappingHandlerMapping'
+2025-10-20T12:16:19.614+09:00 DEBUG 18652 --- [DevelopProject] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-10-20T12:16:19.669+09:00 DEBUG 18652 --- [DevelopProject] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JWTAuthorizationFilter, JWTAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-20T12:16:19.793+09:00 DEBUG 18652 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	e.p.c.CsvController:
+	
+2025-10-20T12:16:19.795+09:00 DEBUG 18652 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2025-10-20T12:16:19.796+09:00 DEBUG 18652 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2025-10-20T12:16:19.797+09:00 DEBUG 18652 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2025-10-20T12:16:19.797+09:00 DEBUG 18652 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2025-10-20T12:16:19.908+09:00 DEBUG 18652 --- [DevelopProject] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-10-20T12:16:20.007+09:00 DEBUG 18652 --- [DevelopProject] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-10-20T12:16:20.386+09:00 DEBUG 18652 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-10-20T12:16:20.387+09:00 DEBUG 18652 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-10-20T12:16:20.388+09:00  INFO 18652 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-10-20T12:16:20.389+09:00 DEBUG 18652 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2c2a6ccc]
+2025-10-20T12:16:20.389+09:00 DEBUG 18652 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2c2a6ccc]
+2025-10-20T12:16:20.390+09:00  INFO 18652 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2c2a6ccc]]
+2025-10-20T12:16:20.391+09:00  INFO 18652 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-10-20T12:16:20.392+09:00 DEBUG 18652 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-10-20T12:16:20.393+09:00 DEBUG 18652 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-10-20T12:16:20.424+09:00  INFO 18652 --- [DevelopProject] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-20T12:16:20.435+09:00  INFO 18652 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : Started DevelopProjectApplication in 10.484 seconds (process running for 11.891)
+2025-10-20T12:17:20.394+09:00  INFO 18652 --- [DevelopProject] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2025-10-20T12:22:31.693+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-20T12:22:31.695+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-20T12:22:31.695+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-10-20T12:22:31.698+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-10-20T12:22:31.698+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-10-20T12:22:31.710+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6bd7f3d4
+2025-10-20T12:22:31.710+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@43e07d88
+2025-10-20T12:22:31.712+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-10-20T12:22:31.712+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
+2025-10-20T12:22:31.768+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/manager/upload?
+2025-10-20T12:22:31.783+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진입]:[1][JWTAuthorizationFilter] 토큰 확인 필터 진입
+2025-10-20T12:22:31.787+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [발행된 토큰] : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjE5NzM5MTAsInVzZXJJZCI6InVzZXIyIiwicm9sZSI6Ik1BTkFHRVIiLCJsb2NhdGlvbl9pZCI6Mn0._KVh0eoRXoewTjl_vfIdPx5G2TZRwb2Nn774EQLPRpM
+2025-10-20T12:22:31.787+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [완료]:[2][JWTAuthorizationFilter] 토큰 확인 완료
+2025-10-20T12:22:32.869+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[5][JWTAuthorizationFilter] username(id) 검색 시작
+2025-10-20T12:22:32.869+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[6][JWTAuthorizationFilter] 사용자 찾음
+2025-10-20T12:22:32.870+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[7][JWTAuthorizationFilter] ROLE 값: [ROLE_MANAGER]
+2025-10-20T12:22:32.871+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [성공]:[8][JWTAuthorizationFilter] 토큰 확인 완료 
+
+2025-10-20T12:22:32.883+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/manager/upload?
+2025-10-20T12:22:32.890+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/manager/upload", parameters={multipart}
+2025-10-20T12:22:32.901+09:00  WARN 18652 --- [DevelopProject] [http-nio-8080-exec-1] org.apache.catalina.connector.Request    : Creating the temporary upload location [C:\Users\9191h\AppData\Local\Temp\tomcat.8080.1592929343086877700\work\Tomcat\localhost\ROOT] as it is required by the servlet [dispatcherServlet]
+2025-10-20T12:22:32.944+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to edu.pnu.controller.CsvController#uploadCsv(MultipartFile, CustomUserDetails)
+2025-10-20T12:22:33.017+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.controller.CsvController         : [API-REQ] CSV 파일 업로드 요청 - user: user2, file: GaRaData.csv
+2025-10-20T12:22:33.033+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [1] [CsvSaveService] [진입] : CsvSaveService 진입 성공 / 업로더 = user2
+2025-10-20T12:22:33.050+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] START - 파일 업로드 시작
+2025-10-20T12:22:33.075+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사
+2025-10-20T12:22:33.077+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사 완료
+2025-10-20T12:22:33.077+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 진입
+2025-10-20T12:22:33.077+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 성공, originalFileName = GaRaData.csv
+2025-10-20T12:22:33.524+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 메타데이터 저장 완료 (fileId=14)
+2025-10-20T12:22:33.524+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [4] [CsvSaveService] [진입] : [storeFileToDisk] BE 서버에 저장 진입
+2025-10-20T12:22:33.532+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [4] [CsvSaveService] [완료] : [storeFileToDisk] BE 서버에 저장 완료
+2025-10-20T12:22:33.550+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 디스크 저장 완료: 210dac27-a952-4ad2-90c6-5534200f0...(truncated)
+2025-10-20T12:22:33.658+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 파싱 준비 완료. 청크 처리 시작
+2025-10-20T12:22:33.660+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [5] [CsvSaveService] [진입] : [parseAndProcessFile] 파싱 프로세스 진입 성공
+2025-10-20T12:22:33.716+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [진입] : [processChunk] 청크 처리를 위한 private 메서드 진입
+2025-10-20T12:22:33.735+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] :  [saveCsvLocations] Location batch insert 완료! 저장 건수: 8
+2025-10-20T12:22:33.757+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] : [saveCsvProducts] Product batch insert 완료! 저장 건수: 1
+2025-10-20T12:22:33.780+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] : [saveEpcs] Epc batch insert 완료! 저장 건수: 5
+2025-10-20T12:22:34.076+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] ERROR - CSV 처리 중 치명적 오류: Cannot invoke "java.lang....(truncated)
+2025-10-20T12:22:34.157+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler edu.pnu.exception.GlobalExceptionHandler#handleAll(Exception)
+2025-10-20T12:22:34.205+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json, application/yaml]
+2025-10-20T12:22:34.205+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing ["서버 내부 오류: CSV 처리 중 오류가 발생했습니다."]
+2025-10-20T12:22:34.230+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: CSV 처리 중 오류가 발생했습니다.]
+2025-10-20T12:22:34.236+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 500 INTERNAL_SERVER_ERROR
+2025-10-20T12:22:50.380+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/manager/upload
+2025-10-20T12:22:50.383+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] e.p.c.filter.JWTAuthorizationFilter      : [진입]:[1][JWTAuthorizationFilter] 토큰 확인 필터 진입
+2025-10-20T12:22:50.383+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] e.p.c.filter.JWTAuthorizationFilter      : [발행된 토큰] : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjE5NzM5MTAsInVzZXJJZCI6InVzZXIyIiwicm9sZSI6Ik1BTkFHRVIiLCJsb2NhdGlvbl9pZCI6Mn0._KVh0eoRXoewTjl_vfIdPx5G2TZRwb2Nn774EQLPRpM
+2025-10-20T12:22:50.383+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] e.p.c.filter.JWTAuthorizationFilter      : [완료]:[2][JWTAuthorizationFilter] 토큰 확인 완료
+2025-10-20T12:22:50.403+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[5][JWTAuthorizationFilter] username(id) 검색 시작
+2025-10-20T12:22:50.403+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[6][JWTAuthorizationFilter] 사용자 찾음
+2025-10-20T12:22:50.403+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[7][JWTAuthorizationFilter] ROLE 값: [ROLE_MANAGER]
+2025-10-20T12:22:50.408+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] e.p.c.filter.JWTAuthorizationFilter      : [성공]:[8][JWTAuthorizationFilter] 토큰 확인 완료 
+
+2025-10-20T12:22:50.408+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/manager/upload
+2025-10-20T12:22:50.413+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/manager/upload", parameters={multipart}
+2025-10-20T12:22:50.441+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to edu.pnu.controller.CsvController#uploadCsv(MultipartFile, CustomUserDetails)
+2025-10-20T12:22:50.451+09:00  INFO 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.controller.CsvController         : [API-REQ] CSV 파일 업로드 요청 - user: user2, file: GaRaData.csv
+2025-10-20T12:22:50.462+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [1] [CsvSaveService] [진입] : CsvSaveService 진입 성공 / 업로더 = user2
+2025-10-20T12:22:50.462+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] START - 파일 업로드 시작
+2025-10-20T12:22:50.481+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사
+2025-10-20T12:22:50.481+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사 완료
+2025-10-20T12:22:50.481+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 진입
+2025-10-20T12:22:50.481+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 성공, originalFileName = GaRaData.csv
+2025-10-20T12:22:50.493+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 메타데이터 저장 완료 (fileId=15)
+2025-10-20T12:22:50.495+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [4] [CsvSaveService] [진입] : [storeFileToDisk] BE 서버에 저장 진입
+2025-10-20T12:22:50.497+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [4] [CsvSaveService] [완료] : [storeFileToDisk] BE 서버에 저장 완료
+2025-10-20T12:22:50.523+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 디스크 저장 완료: 761e8c7b-d4c1-4824-9b0f-d1fe2ada1...(truncated)
+2025-10-20T12:22:50.560+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 파싱 준비 완료. 청크 처리 시작
+2025-10-20T12:22:50.560+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [5] [CsvSaveService] [진입] : [parseAndProcessFile] 파싱 프로세스 진입 성공
+2025-10-20T12:22:50.579+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveService       : [진입] : [processChunk] 청크 처리를 위한 private 메서드 진입
+2025-10-20T12:22:50.835+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] :  [saveCsvLocations] Location batch insert 완료! 저장 건수: 8
+2025-10-20T12:22:50.860+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] : [saveCsvProducts] Product batch insert 완료! 저장 건수: 1
+2025-10-20T12:22:50.910+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] : [saveEpcs] Epc batch insert 완료! 저장 건수: 5
+2025-10-20T12:22:50.935+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] ERROR - CSV 처리 중 치명적 오류: Cannot invoke "java.lang....(truncated)
+2025-10-20T12:22:50.935+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler edu.pnu.exception.GlobalExceptionHandler#handleAll(Exception)
+2025-10-20T12:22:50.943+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json, application/yaml]
+2025-10-20T12:22:50.943+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing ["서버 내부 오류: CSV 처리 중 오류가 발생했습니다."]
+2025-10-20T12:22:50.947+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.RuntimeException: CSV 처리 중 오류가 발생했습니다.]
+2025-10-20T12:22:50.948+09:00 DEBUG 18652 --- [DevelopProject] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 500 INTERNAL_SERVER_ERROR
+2025-10-20T12:44:07.989+09:00  WARN 18652 --- [DevelopProject] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m52s274ms38µs600ns).
+2025-10-20T12:52:42.675+09:00  INFO 18652 --- [DevelopProject] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 1]
+2025-10-20T13:44:52.055+09:00  WARN 18652 --- [DevelopProject] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=44m43s726ms890µs100ns).
+2025-10-20T13:52:28.988+09:00  INFO 18652 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-20T13:52:29.515+09:00  INFO 18652 --- [DevelopProject] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-20T13:52:29.522+09:00 DEBUG 18652 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-10-20T13:52:29.522+09:00 DEBUG 18652 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-10-20T13:52:29.522+09:00  INFO 18652 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2025-10-20T13:52:29.522+09:00  INFO 18652 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2c2a6ccc]]
+2025-10-20T13:52:29.522+09:00 DEBUG 18652 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2c2a6ccc]
+2025-10-20T13:52:29.522+09:00 DEBUG 18652 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2c2a6ccc]
+2025-10-20T13:52:29.523+09:00  INFO 18652 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2025-10-20T13:52:29.523+09:00 DEBUG 18652 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-10-20T13:52:29.523+09:00 DEBUG 18652 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-10-20T13:52:29.529+09:00  INFO 18652 --- [DevelopProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T13:52:29.535+09:00  INFO 18652 --- [DevelopProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-20T13:52:29.539+09:00  INFO 18652 --- [DevelopProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-20T13:52:35.623+09:00  INFO 11784 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : Starting DevelopProjectApplication using Java 17.0.12 with PID 11784 (C:\Users\9191h\Documents\GitHub\DevelopProject\target\classes started by 9191h in C:\Users\9191h\Documents\GitHub\DevelopProject)
+2025-10-20T13:52:35.625+09:00  INFO 11784 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T13:52:36.210+09:00  INFO 11784 --- [DevelopProject] [main] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 4 ms.
+2025-10-20T13:52:36.420+09:00  INFO 11784 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T13:52:36.499+09:00  INFO 11784 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 13 JPA repository interfaces.
+2025-10-20T13:52:36.865+09:00  INFO 11784 --- [DevelopProject] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-20T13:52:36.875+09:00  INFO 11784 --- [DevelopProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T13:52:36.876+09:00  INFO 11784 --- [DevelopProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-10-20T13:52:36.919+09:00  INFO 11784 --- [DevelopProject] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-20T13:52:36.919+09:00  INFO 11784 --- [DevelopProject] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1253 ms
+2025-10-20T13:52:37.029+09:00  INFO 11784 --- [DevelopProject] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T13:52:37.105+09:00  INFO 11784 --- [DevelopProject] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-10-20T13:52:37.177+09:00  INFO 11784 --- [DevelopProject] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-20T13:52:37.374+09:00  INFO 11784 --- [DevelopProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T13:52:37.393+09:00  INFO 11784 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-20T13:52:37.642+09:00  INFO 11784 --- [DevelopProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6eb5b9e7
+2025-10-20T13:52:37.643+09:00  INFO 11784 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-20T13:52:37.676+09:00  WARN 11784 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-20T13:52:37.676+09:00  WARN 11784 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-20T13:52:37.689+09:00  INFO 11784 --- [DevelopProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-20T13:52:38.464+09:00  INFO 11784 --- [DevelopProject] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-20T13:52:38.571+09:00  INFO 11784 --- [DevelopProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T13:52:38.761+09:00  INFO 11784 --- [DevelopProject] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-10-20T13:52:39.713+09:00  INFO 11784 --- [DevelopProject] [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+2025-10-20T13:52:39.745+09:00  INFO 11784 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-10-20T13:52:39.749+09:00  INFO 11784 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-10-20T13:52:39.929+09:00  WARN 11784 --- [DevelopProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-20T13:52:39.960+09:00  INFO 11784 --- [DevelopProject] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name securityUserDetailsService
+2025-10-20T13:52:40.018+09:00  INFO 11784 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [진입] : [WebSocketConfig] WebSocket 엔드포인트 설정을 시작합니다.
+2025-10-20T13:52:40.023+09:00  INFO 11784 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [완료] : [WebSocketConfig] '/webSocket' 엔드포인트가 설정되었습니다.
+2025-10-20T13:52:40.036+09:00 DEBUG 11784 --- [DevelopProject] [main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/webSocket/**] in 'stompWebSocketHandlerMapping'
+2025-10-20T13:52:40.089+09:00 DEBUG 11784 --- [DevelopProject] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 10 mappings in 'requestMappingHandlerMapping'
+2025-10-20T13:52:40.123+09:00 DEBUG 11784 --- [DevelopProject] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-10-20T13:52:40.171+09:00 DEBUG 11784 --- [DevelopProject] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JWTAuthorizationFilter, JWTAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-10-20T13:52:40.217+09:00 DEBUG 11784 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	e.p.c.CsvController:
+	
+2025-10-20T13:52:40.218+09:00 DEBUG 11784 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2025-10-20T13:52:40.219+09:00 DEBUG 11784 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2025-10-20T13:52:40.219+09:00 DEBUG 11784 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2025-10-20T13:52:40.219+09:00 DEBUG 11784 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2025-10-20T13:52:40.254+09:00 DEBUG 11784 --- [DevelopProject] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-10-20T13:52:40.286+09:00 DEBUG 11784 --- [DevelopProject] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-10-20T13:52:40.461+09:00 DEBUG 11784 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-10-20T13:52:40.461+09:00 DEBUG 11784 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-10-20T13:52:40.462+09:00  INFO 11784 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-10-20T13:52:40.462+09:00 DEBUG 11784 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6915ba65]
+2025-10-20T13:52:40.462+09:00 DEBUG 11784 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6915ba65]
+2025-10-20T13:52:40.462+09:00  INFO 11784 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6915ba65]]
+2025-10-20T13:52:40.463+09:00  INFO 11784 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-10-20T13:52:40.463+09:00 DEBUG 11784 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-10-20T13:52:40.463+09:00 DEBUG 11784 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-10-20T13:52:40.478+09:00  INFO 11784 --- [DevelopProject] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-20T13:52:40.485+09:00  INFO 11784 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : Started DevelopProjectApplication in 5.3 seconds (process running for 5.947)
+2025-10-20T13:53:29.101+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-20T13:53:29.101+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-20T13:53:29.101+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-10-20T13:53:29.101+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-10-20T13:53:29.101+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-10-20T13:53:29.102+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@7f180c74
+2025-10-20T13:53:29.103+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@22d94240
+2025-10-20T13:53:29.103+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-10-20T13:53:29.103+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-10-20T13:53:29.113+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/manager/upload?
+2025-10-20T13:53:29.117+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진입]:[1][JWTAuthorizationFilter] 토큰 확인 필터 진입
+2025-10-20T13:53:29.117+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [발행된 토큰] : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjE5NzM5MTAsInVzZXJJZCI6InVzZXIyIiwicm9sZSI6Ik1BTkFHRVIiLCJsb2NhdGlvbl9pZCI6Mn0._KVh0eoRXoewTjl_vfIdPx5G2TZRwb2Nn774EQLPRpM
+2025-10-20T13:53:29.117+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [완료]:[2][JWTAuthorizationFilter] 토큰 확인 완료
+2025-10-20T13:53:29.226+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[5][JWTAuthorizationFilter] username(id) 검색 시작
+2025-10-20T13:53:29.228+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[6][JWTAuthorizationFilter] 사용자 찾음
+2025-10-20T13:53:29.228+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [진행]:[7][JWTAuthorizationFilter] ROLE 값: [ROLE_MANAGER]
+2025-10-20T13:53:29.229+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] e.p.c.filter.JWTAuthorizationFilter      : [성공]:[8][JWTAuthorizationFilter] 토큰 확인 완료 
+
+2025-10-20T13:53:29.232+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/manager/upload?
+2025-10-20T13:53:29.233+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/manager/upload", parameters={multipart}
+2025-10-20T13:53:29.247+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to edu.pnu.controller.CsvController#uploadCsv(MultipartFile, CustomUserDetails)
+2025-10-20T13:53:29.262+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.controller.CsvController         : [API-REQ] CSV 파일 업로드 요청 - user: user2, file: GaRaData.csv
+2025-10-20T13:53:29.266+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [1] [CsvSaveService] [진입] : CsvSaveService 진입 성공 / 업로더 = user2
+2025-10-20T13:53:29.269+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] START - 파일 업로드 시작
+2025-10-20T13:53:29.273+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사
+2025-10-20T13:53:29.273+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사 완료
+2025-10-20T13:53:29.273+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 진입
+2025-10-20T13:53:29.274+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 성공, originalFileName = GaRaData.csv
+2025-10-20T13:53:29.298+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 메타데이터 저장 완료 (fileId=16)
+2025-10-20T13:53:29.299+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [4] [CsvSaveService] [진입] : [storeFileToDisk] BE 서버에 저장 진입
+2025-10-20T13:53:29.300+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [4] [CsvSaveService] [완료] : [storeFileToDisk] BE 서버에 저장 완료
+2025-10-20T13:53:29.301+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 디스크 저장 완료: 4c5ce4c5-f058-4dda-bdf5-716ec6d6c...(truncated)
+2025-10-20T13:53:29.330+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] INFO  - 파싱 준비 완료. 청크 처리 시작
+2025-10-20T13:53:29.330+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [5] [CsvSaveService] [진입] : [parseAndProcessFile] 파싱 프로세스 진입 성공
+2025-10-20T13:53:29.347+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveService       : [진입] : [processChunk] 청크 처리를 위한 private 메서드 진입
+2025-10-20T13:53:29.354+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] :  [saveCsvLocations] Location batch insert 완료! 저장 건수: 8
+2025-10-20T13:53:29.357+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] : [saveCsvProducts] Product batch insert 완료! 저장 건수: 1
+2025-10-20T13:53:29.363+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveJdbcService] [성공] : [saveEpcs] Epc batch insert 완료! 저장 건수: 5
+2025-10-20T13:53:29.397+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.service.csv.CsvSaveJdbcService   : [CsvSaveBatchService] [성공] : [saveEventHistories] EventHistory batch insert 완료! 저장 건수: 40, ID 설정 완료
+2025-10-20T13:53:29.397+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] PROG  - 파싱 진행: 41행 처리 (마지막 청크)
+2025-10-20T13:53:29.398+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] WARN  - 파싱 오류 라인 1건 (세부는 서버 로그)
+2025-10-20T13:53:29.400+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] org.springframework.web.SimpLogging      : Processing MESSAGE destination=/notify/user2 session=null payload=[1단계/CSV] DONE  - CSV 저장 및 파싱 완료. 2단계 분석 시작
+2025-10-20T13:53:29.406+09:00  INFO 11784 --- [DevelopProject] [http-nio-8080-exec-1] edu.pnu.batch.TripJobTrigger             : [배치트리거] : [TripJobTrigger] CSV 업로드 로그 ID = 16로 배치 진입
+2025-10-20T13:53:29.511+09:00  INFO 11784 --- [DevelopProject] [task-1] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=tripBuildJob]] launched with the following parameters: [{'time':'{value=1760936009407, type=class java.lang.Long, identifying=true}','fileId':'{value=16, type=class java.lang.Long, identifying=true}'}]
+2025-10-20T13:53:29.524+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/yaml]
+2025-10-20T13:53:29.526+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{message=업로드 시작됨. 파일 ID: 16. 진행상황은 실시간으로 알림됩니다.}]
+2025-10-20T13:53:29.541+09:00 DEBUG 11784 --- [DevelopProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-20T13:53:29.587+09:00  INFO 11784 --- [DevelopProject] [task-1] o.s.batch.core.job.SimpleStepHandler     : Executing step: [generateTripsStep]
+2025-10-20T13:53:29.607+09:00  INFO 11784 --- [DevelopProject] [task-1] edu.pnu.config.BatchConfig               : [실행] : [BatchConfig] Step 실행됨!
+2025-10-20T13:53:29.607+09:00  INFO 11784 --- [DevelopProject] [task-1] e.p.s.a.t.AnalysisTripGenerationService  : [시작] : [AnalysisTripService] fileId=16의 AnalysisTrip 생성 시작
+2025-10-20T13:53:29.740+09:00  INFO 11784 --- [DevelopProject] [task-1] e.p.s.a.t.AnalysisTripGenerationService  : [완료] : [AnalysisTripService] fileId=16의 AnalysisTrip 생성 완료. (총 저장 건수: 35건)
+2025-10-20T13:53:29.750+09:00  INFO 11784 --- [DevelopProject] [task-1] o.s.batch.core.step.AbstractStep         : Step: [generateTripsStep] executed in 161ms
+2025-10-20T13:53:29.778+09:00 ERROR 11784 --- [DevelopProject] [task-1] o.s.batch.core.job.AbstractJob           : Exception encountered in afterJob callback
+
+org.hibernate.LazyInitializationException: Could not initialize proxy [edu.pnu.domain.Member#1] - no session
+	at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:174) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:328) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor.intercept(ByteBuddyInterceptor.java:44) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.proxy.ProxyConfiguration$InterceptorDispatcher.intercept(ProxyConfiguration.java:102) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at edu.pnu.domain.Member$HibernateProxy.getUserId(Unknown Source) ~[classes/:na]
+	at edu.pnu.batch.AfterTripJobPipelineTrigger.lambda$afterJob$0(AfterTripJobPipelineTrigger.java:32) ~[classes/:na]
+	at java.base/java.util.Optional.map(Optional.java:260) ~[na:na]
+	at edu.pnu.batch.AfterTripJobPipelineTrigger.afterJob(AfterTripJobPipelineTrigger.java:32) ~[classes/:na]
+	at org.springframework.batch.core.listener.CompositeJobExecutionListener.afterJob(CompositeJobExecutionListener.java:60) ~[spring-batch-core-5.2.2.jar:5.2.2]
+	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:360) ~[spring-batch-core-5.2.2.jar:5.2.2]
+	at org.springframework.batch.core.launch.support.TaskExecutorJobLauncher$1.run(TaskExecutorJobLauncher.java:155) ~[spring-batch-core-5.2.2.jar:5.2.2]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2025-10-20T13:53:29.790+09:00  INFO 11784 --- [DevelopProject] [task-1] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=tripBuildJob]] completed with the following parameters: [{'time':'{value=1760936009407, type=class java.lang.Long, identifying=true}','fileId':'{value=16, type=class java.lang.Long, identifying=true}'}] and the following status: [COMPLETED] in 245ms
+2025-10-20T13:53:40.453+09:00  INFO 11784 --- [DevelopProject] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]

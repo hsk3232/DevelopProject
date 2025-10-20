@@ -251,11 +251,31 @@ public class CsvSaveService {
         if (!newEpcs.isEmpty()) csvSaveJdbcService.saveEpcs(newEpcs);
 
         // 저장 완료된 엔티티로 캐시 확정(신규만 반영)
-        for (CsvProduct p : newProducts) {
-            cache.productMap.put(productKey(p.getEpcCompany(), p.getEpcProduct()), p);
+        // 저장 완료된 엔티티로 캐시 확정(신규만 '영속 객체'로 반영)
+        if (!newProducts.isEmpty()) {
+            Map<String, CsvProduct> freshProducts = csvProductRepo.findAllByFileIdAsMap(csv.getFileId());
+            for (CsvProduct p : newProducts) {
+                String key = productKey(p.getEpcCompany(), p.getEpcProduct());
+                CsvProduct persisted = freshProducts.get(key);
+                if (persisted != null) {
+                    cache.productMap.put(key, persisted); // ← ID가 채워진 객체로 교체
+                } else {
+                    // 안전장치: 혹시 INSERT 무시/중복 등으로 못 찾았을 때 대비
+                    cache.productMap.remove(key);
+                }
+            }
         }
-        for (Epc e : newEpcs) {
-            cache.epcMap.put(e.getEpcCode(), e);
+        if (!newEpcs.isEmpty()) {
+            Map<String, Epc> freshEpcs = epcRepo.findAllByFileIdAsMap(csv.getFileId());
+            for (Epc e : newEpcs) {
+                String code = e.getEpcCode();
+                Epc persisted = freshEpcs.get(code);
+                if (persisted != null) {
+                    cache.epcMap.put(code, persisted); // ← ID가 채워진 객체로 교체
+                } else {
+                    cache.epcMap.remove(code);
+                }
+            }
         }
 
         // 3) EventHistory 파싱/중복 제거/저장
