@@ -39,13 +39,13 @@ public class MemberDTO {
         private Long locationId; // AssetLocation
         private Role role;
 
-        public Member toEntity(String encryptedPassword) {
+        public Member toEntity() {
             AssetLocation ALocation = AssetLocation.builder().locationId(locationId).build();
 
             return Member.builder()
                     .userId(userId)
                     .userName(userName)
-                    .password(encryptedPassword)
+                    .password(password)
                     .email(email)
                     .phone(phone)
                     .role(Role.ROLE_UNAUTH)
