@@ -1,5 +1,7 @@
 package edu.pnu.service.analysis;
 
+import edu.pnu.service.analysis.ai.AiAnalysisService;
+import edu.pnu.service.analysis.be.BeAnalysisService;
 import edu.pnu.service.analysis.statistics.StatisticsAdminService;
 import edu.pnu.service.messaging.WebSocketService;
 import lombok.RequiredArgsConstructor;

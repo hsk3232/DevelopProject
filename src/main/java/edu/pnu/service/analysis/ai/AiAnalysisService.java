@@ -1,4 +1,4 @@
-package edu.pnu.service.analysis;
+package edu.pnu.service.analysis.ai;
 
 import edu.pnu.config.AiClientProperties;
 import edu.pnu.domain.AiAnalysis;
