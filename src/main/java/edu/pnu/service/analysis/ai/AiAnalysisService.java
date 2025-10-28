@@ -163,7 +163,7 @@ public class AiAnalysisService {
     //  - 둘 다 실패하면 예외
     private List<AiCommunicationDTO.ImportPayload> parseImportPayload(String json) {
         try {
-            return om.readValue(json, new TypeReference<List<AiCommunicationDTO.ImportPayload>>() {
+            return om.readValue(json, new TypeReference<>() {
             });
         } catch (Exception ignore) {
             try {

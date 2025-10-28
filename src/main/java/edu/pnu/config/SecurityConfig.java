@@ -3,13 +3,14 @@ package edu.pnu.config;
 import edu.pnu.config.filter.JWTAuthenticationFilter;
 import edu.pnu.config.filter.JWTAuthorizationFilter;
 import edu.pnu.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,9 +24,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
-    @Autowired
+
     private AuthenticationConfiguration authenticationConfiguration;
-    @Autowired
     private MemberRepository memberRepository;
 
     @Bean
@@ -36,7 +36,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // CSRF 보호 비활성화
-        http.csrf(csrf -> csrf.disable());
+        //http.csrf(csrf -> csrf.disable()); 아래의 method reference와 기능 동일
+        http.csrf(AbstractHttpConfigurer::disable);
+
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
@@ -49,7 +51,8 @@ public class SecurityConfig {
         );
         // Form을 이용한 로그인을 사용하지 않겠다는 명시적 설정
         // UsernamePasswordAuthenticationFilter가 현재 없지만 명시적 제거
-        http.formLogin(frmLogin -> frmLogin.disable());
+        //http.formLogin(frmLogin -> frmLogin.disable());
+        http.formLogin(AbstractHttpConfigurer::disable);
 
         // 인가되지 않은 사용자는 /unauth로 이동 -> JWT에서는 잘 안된다고 함.
         http.exceptionHandling(ex -> ex
@@ -62,7 +65,8 @@ public class SecurityConfig {
 
         // Http Basic인증 방식을 사용하지 않겠다는 명시적 설정
         // BasicAuthenticationFilter가 현재 없지만 명시적 제거
-        http.httpBasic(basic -> basic.disable());
+        // http.httpBasic(basic -> basic.disable());
+        http.httpBasic(AbstractHttpConfigurer::disable);
         // 세션을 유지하지 않겠다고 설정 (SessionManagementFilter 등록)
         // Url 호출 뒤 응답할 때 까지는 유지되지만 응답 후 삭제
         http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

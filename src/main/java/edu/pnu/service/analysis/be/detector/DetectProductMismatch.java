@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -52,7 +51,7 @@ public class DetectProductMismatch implements BeDetector {
                     .filter(Objects::nonNull)
                     .sorted(Comparator.comparing(EventHistory::getEventTime,
                             Comparator.nullsLast(Comparator.naturalOrder())))
-                    .collect(Collectors.toList());
+                    .toList();
             if (sorted.isEmpty()) continue;
 
             EventHistory representativeEvent = events.get(0);

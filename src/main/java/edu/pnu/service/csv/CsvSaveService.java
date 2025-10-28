@@ -80,6 +80,7 @@ public class CsvSaveService {
     }
 
     // ■■■■■■■■■■■■■■ [ 1단계: CSV 저장/파싱 (동기) ] ■■■■■■■■■■■■■
+    // 업로드된 CSV를 저장·파싱하고 메타데이터 저장 후 비동기 분석 트리거(이벤트 발행)까지 한 번에 수행
     @Transactional
     public Long postCsvAndTriggerAsyncProcessing(MultipartFile file, CustomUserDetails user) {
         final String userId = user.getUserId();
@@ -124,7 +125,7 @@ public class CsvSaveService {
     }
 
     // ■■■■■■■■■■■■■■ [ 2~4단계: 동기 저장 ] ■■■■■■■■■■■■■
-
+    // 저장된 CSV 파일을 청크 단위로 읽어 파싱하고 각 청크를 처리하기 위해 processChunk를 호출
     private Map<String, List<Integer>> parseAndProcessFile(Csv csv, ImportCache cache, String userId) {
         final Map<String, List<Integer>> errorRows = new HashMap<>();
         final Path path = Paths.get(fileUploadDir, csv.getSavedFileName());
@@ -181,6 +182,7 @@ public class CsvSaveService {
 
 
     // ■■■■■■■■■■■■■■ [ 청크 처리 ] ■■■■■■■■■■■■■
+    // 하나의 청크를 파싱하여 Location/Product/EPC를 수집·중복제거하고, 엔티티를 배치로 저장한 뒤 EventHistory를 생성
     private void processChunk(List<String[]> chunk,
                               Map<String, Integer> colIdx,
                               Csv csv,
@@ -346,7 +348,7 @@ public class CsvSaveService {
         log.debug("[2] [CsvSaveService] [진입] : [validateFile] file 확장자 검사 완료");
     }
 
-    // [CSV Meta 정보 저장]
+    // [CSV Meta 정보 저장] : 업로드 파일의 메타데이터(Csv 엔티티)를 생성·DB에 저장하고 저장된 Csv를 반환
     private Csv createAndSaveCsvMetadata(MultipartFile file, Member member) {
         log.debug("[3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 진입");
         String originalFileName = file.getOriginalFilename();
@@ -362,7 +364,7 @@ public class CsvSaveService {
         return csvRepo.save(csv);
     }
 
-    // [파일 저장] Csv 파일 BE 서버에 저장
+    // [파일 저장] : 업로드된 MultipartFile을 지정된 디스크 위치(fileUploadDir)에 저장
     private void storeFileToDisk(MultipartFile file, Csv csv) {
         try {
             log.debug("[4] [CsvSaveService] [진입] : [storeFileToDisk] BE 서버에 저장 진입");
@@ -376,6 +378,7 @@ public class CsvSaveService {
         }
     }
 
+    // [필수 칼럼 확인] : CSV 헤더 배열로부터 컬럼명→인덱스 맵을 만들고 필수 컬럼 누락 체크를 수행
     private Map<String, Integer> getColumnIndexMap(String[] header) {
         if (header == null)
             throw new InvalidCsvFormatException("CSV 파일에 헤더가 없습니다.");
@@ -403,6 +406,7 @@ public class CsvSaveService {
         return colIdx;
     }
 
+    // [빈값 및 null 확인] : 주어진 행(row)에서 컬럼명에 해당하는 값을 안전하게 읽어와 null/빈값을 처리
     private String getValue(Map<String, Integer> colIdx, String[] row, String colName) {
         Integer idx = colIdx.get(colName.toLowerCase());
         if (idx == null || idx >= row.length) return null;
@@ -411,6 +415,7 @@ public class CsvSaveService {
         // 필요시 "NULL"/"null" 같은 문자열도 무시하도록 확장 가능
     }
 
+    // 문자열을 Long으로 변환하되 포맷오류 발생 시 null을 반환하는 안전 변환기
     private Long parseLongSafe(String s) {
         if (s == null) return null;
         try {
@@ -420,6 +425,7 @@ public class CsvSaveService {
         }
     }
 
+    // [날짜 + 시간 변환] : 문자열을 LocalDateTime으로 파싱하고 실패 시 errorRows에 행번호를 기록한 뒤 null을 반환
     private LocalDateTime tryParseDateTime(String value,
                                            DateTimeFormatter formatter,
                                            Map<String, List<Integer>> errorRows,
@@ -436,6 +442,7 @@ public class CsvSaveService {
         }
     }
 
+    // [날짜 변환] : 문자열을 LocalDate으로 파싱하고 실패 시 errorRows에 행번호를 기록한 뒤 null을 반환
     private LocalDate tryParseDate(String value,
                                    DateTimeFormatter formatter,
                                    Map<String, List<Integer>> errorRows,
@@ -452,6 +459,7 @@ public class CsvSaveService {
         }
     }
 
+    // [business_step 변환] : 입력된 business_step 문자열을 내부 표준(Factory, WMS, LogiHub 등)으로 정규화
     private String normalizeBusinessStep(String input) {
         if (input == null) return null;
         String s = input.trim().toLowerCase();
@@ -464,6 +472,7 @@ public class CsvSaveService {
         return input;
     }
 
+    // EventHistory의 유니크 제약을 만족하는 문자열 키(파일ID·EPC·로케이션·제품·시간·스텝·이벤트타입 조합)를 생성
     private String buildEventKey(Long fileId,
                                  Epc epc,
                                  Long locationId,
@@ -484,7 +493,7 @@ public class CsvSaveService {
                 eventType != null ? eventType : "null"
         );
     }
-
+    // [Hash64] : FNV-1a 알고리즘으로 주어진 문자열의 64비트 해시값을 계산하여 반환
     private long hash64(String s) {
         // FNV-1a 64-bit
         long h = 0xcbf29ce484222325L;
@@ -496,20 +505,13 @@ public class CsvSaveService {
     }
 
     // ■■■■■■■■■■■■■■ [ 인메모리 캐시 ] ■■■■■■■■■■■■■
+    // 청크 처리 중 사용하는 인메모리 캐시(locationIds, productMap, epcMap, epcCodes)를 초기화
+    @RequiredArgsConstructor
     private static final class ImportCache {
         final Set<Long> locationIds;              // 전역 locationId (CsvLocation PK) 중복 체크
         final Map<String, CsvProduct> productMap; // 파일 내 product 키 -> CsvProduct
         final Map<String, Epc> epcMap;            // 파일 내 epcCode -> Epc
         final Set<String> epcCodes;               // 파일 내 epcCode 중복 체크
-
-        ImportCache(Set<Long> locationIds,
-                    Map<String, CsvProduct> productMap,
-                    Map<String, Epc> epcMap,
-                    Set<String> epcCodes) {
-            this.locationIds = locationIds;
-            this.productMap = productMap;
-            this.epcMap = epcMap;
-            this.epcCodes = epcCodes;
-        }
+    }
     }
 }

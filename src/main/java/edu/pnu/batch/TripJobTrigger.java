@@ -26,7 +26,7 @@ public class TripJobTrigger {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void handleEvent(DbSavedEvent event) throws Exception {
 
-        log.info("[배치트리거] : [TripJobTrigger] CSV 업로드 로그 ID = " + event.getFileId() + "로 배치 진입");
+        log.info("[배치트리거] : [TripJobTrigger] CSV 업로드 로그 ID = {}로 배치 진입", event.getFileId());
 
         // [JobParameters] - Spring Batch에서는 파라미터가 동일하면 이미 실행된 Job으로 간주하고 다시 실행하지 않음
         JobParameters params = new JobParametersBuilder()

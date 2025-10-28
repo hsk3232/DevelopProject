@@ -1,18 +1,5 @@
 package edu.pnu.config.filter;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.Optional;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-
 import edu.pnu.config.CustomUserDetails;
 import edu.pnu.domain.Member;
 import edu.pnu.repository.MemberRepository;
@@ -22,6 +9,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 
 @Slf4j // ▶ 로그 출력을 위한 Slf4j
 @RequiredArgsConstructor // ▶ final 멤버 필드를 파라미터로 받는 생성자 자동 생성
@@ -38,7 +37,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter { // ▶ 요청
 
         // [1] HTTP 요청 헤더에서 Authorization(토큰) 값 가져오기
         String srcToken = request.getHeader(HttpHeaders.AUTHORIZATION); // 요청 헤더에서 Authorization 추출
-        log.info("[발행된 토큰] : " + srcToken);
+        log.info("[발행된 토큰] : {}", srcToken);
 
         // [2] 토큰이 없거나, 'Bearer '로 시작하지 않으면 인증처리 하지 않고 필터 통과
         if (srcToken == null || !srcToken.startsWith("Bearer ")) {
@@ -86,7 +85,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter { // ▶ 요청
 
         } catch (Exception e) {
             // [5] 토큰 검증 실패시 (예: 만료, 변조 등) 401 에러 반환
-            log.info("[오류]:[4][JWTAuthorizationFilter] JWT 오류 발생 " + e.getMessage());
+            log.info("[오류]:[4][JWTAuthorizationFilter] JWT 오류 발생 {}", e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
             return;
         }
@@ -110,7 +109,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter { // ▶ 요청
 
         // [8] DB에서 찾은 Member 정보 꺼내기
         Member findmember = opt.get();
-        log.info("[진행]:[7][JWTAuthorizationFilter] ROLE 값: [" + findmember.getRole() + "]");
+        log.info("[진행]:[7][JWTAuthorizationFilter] ROLE 값: [{}]", findmember.getRole());
 
         try {
             // [9] CustomUserDetails 객체 생성 (Spring Security 인증 객체)

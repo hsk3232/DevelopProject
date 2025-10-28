@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -36,7 +37,7 @@ public class CsvSaveJdbcService {
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
             @Override
-            public void setValues(PreparedStatement ps, int i) throws SQLException {
+            public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 CsvLocation l = locations.get(i);
                 ps.setLong(1, l.getCsv().getFileId());
                 ps.setLong(2, l.getLocationId());
@@ -63,7 +64,7 @@ public class CsvSaveJdbcService {
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
             @Override
-            public void setValues(PreparedStatement ps, int i) throws SQLException {
+            public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 CsvProduct p = products.get(i);
                 ps.setLong(1, p.getCsv().getFileId());
                 ps.setString(2, p.getEpcProduct());
@@ -88,7 +89,7 @@ public class CsvSaveJdbcService {
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
-            public void setValues(PreparedStatement ps, int i) throws SQLException {
+            public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 Epc e = epcs.get(i);
                 ps.setLong(1, e.getCsv().getFileId());
                 ps.setString(2, e.getEpcCode());

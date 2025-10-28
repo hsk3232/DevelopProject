@@ -51,8 +51,8 @@ public class DetectRouteViolation implements BeDetector {
                 if (fromEvent.getCsvLocation() == null || toEvent.getCsvLocation() == null) {
                     log.warn("[DetectRouteViolation] missing csvLocation: epc={}, fromEventId={}, toEventId={}",
                             epcCode,
-                            fromEvent == null ? null : fromEvent.getEventId(),
-                            toEvent == null ? null : toEvent.getEventId());
+                            fromEvent.getEventId(),
+                            toEvent.getEventId());
                     continue;
                 }
 

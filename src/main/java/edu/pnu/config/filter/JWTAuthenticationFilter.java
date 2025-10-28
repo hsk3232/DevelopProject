@@ -1,5 +1,15 @@
 package edu.pnu.config.filter;
 
+import edu.pnu.config.CustomUserDetails;
+import edu.pnu.domain.Member;
+import edu.pnu.dto.MemberDTO;
+import edu.pnu.repository.MemberRepository;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -10,20 +20,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import edu.pnu.config.CustomUserDetails;
-import edu.pnu.domain.Member;
-import edu.pnu.dto.MemberDTO;
-import edu.pnu.repository.MemberRepository;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 //@RequiredArgsConstructor => 롬복 생성자는 8080/login으로 연결되기 때문에 url 바꾸려면 직접 생성자를 선언해야함.
@@ -86,11 +85,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		// 자격 증명이 성공하면 loadUserByUsername에서 만든 객체가 authResult에 담겨져 있다.
 		log.info("[성공] : [3][JWTAuthenticationFilter] 사용자 인증 성공");
 		
-		
+
 		//User user = (User)authResult.getPrincipal(); // CustomUserDetails로 캐스팅
 		CustomUserDetails user = (CustomUserDetails) authResult.getPrincipal();
 		
-		log.info("[유저] : " + user); // user 객체를 콘솔에 출력해서 확인
+		log.info("[유저] : {}", user.getUserId()); // user 객체를 콘솔에 출력해서 확인
 		
 		// username으로 JWT를 생성해서 Response Header - Authorization에 담아서 돌려준다.
 		// 이것은 하나의 예시로서 필요에 따라 추가 정보를 담을 수 있다.
