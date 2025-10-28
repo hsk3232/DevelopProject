@@ -1,5 +1,6 @@
 package edu.pnu.service.analysis.be.detector;
 
+import edu.pnu.domain.AnalysisTrip;
 import edu.pnu.domain.BeAnalysis;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.service.analysis.be.api.BeDetector;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,10 +19,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class DetectRouteTampering implements BeDetector {
+public class DetectRouteViolation implements BeDetector {
 
     @Override
     public List<BeAnalysis> detect(Map<String, List<EventHistory>> eventsByEpc,
+                                   Map<String, List<AnalysisTrip>> tripsByEpc,
                                    Set<String> alreadyDetectedEpcIds,
                                    AssetCache assetCache) {
         List<BeAnalysis> results = new ArrayList<>();
@@ -34,12 +37,36 @@ public class DetectRouteTampering implements BeDetector {
             }
 
             List<EventHistory> events = entry.getValue();
+
+            // EPC별 이벤트는 시간순 정렬
+            events.sort(Comparator.comparing(EventHistory::getEventTime, Comparator.nullsLast(Comparator.naturalOrder())));
             // 이벤트가 2개 이상이어야 경로가 생성됩니다.
             for (int i = 0; i < events.size() - 1; i++) {
                 EventHistory fromEvent = events.get(i);
                 EventHistory toEvent = events.get(i + 1);
 
-                String currentRoute = fromEvent.getCsvLocation().getLocationId() + "->" + toEvent.getCsvLocation().getLocationId();
+                if (fromEvent == null || toEvent == null) continue;
+
+                // csvLocation 혹은 locationId가 null이면 그 쌍은 검사 불가 -> 건너뜀
+                if (fromEvent.getCsvLocation() == null || toEvent.getCsvLocation() == null) {
+                    log.warn("[DetectRouteViolation] missing csvLocation: epc={}, fromEventId={}, toEventId={}",
+                            epcCode,
+                            fromEvent == null ? null : fromEvent.getEventId(),
+                            toEvent == null ? null : toEvent.getEventId());
+                    continue;
+                }
+
+                Long fromLocId = fromEvent.getCsvLocation().getLocationId();
+                Long toLocId = toEvent.getCsvLocation().getLocationId();
+
+                if (fromLocId == null || toLocId == null) {
+                    log.warn("[DetectRouteViolation] missing locationId: epc={}, fromEventId={}, toEventId={}",
+                            epcCode, fromEvent.getEventId(), toEvent.getEventId());
+                    continue;
+                }
+
+                // Long 타입을 String 포맷으로 결합 (예: "1->2")
+                String currentRoute = fromLocId + "->" + toLocId;
 
                 if (!validRoutes.contains(currentRoute)) {
                     // 도착점(toEvent) 기준으로 이상을 기록합니다.

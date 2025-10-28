@@ -1,5 +1,6 @@
 package edu.pnu.service.analysis.be.api;
 
+import edu.pnu.domain.AnalysisTrip;
 import edu.pnu.domain.BeAnalysis;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.service.analysis.be.support.AssetCache;
@@ -21,9 +22,13 @@ public interface BeDetector {
      * @param assetCache 미리 로드된 기준 정보 캐시
      * @return 탐지된 이상 징후(BeAnalysis) 목록
      */
-    List<BeAnalysis> detect(Map<String, List<EventHistory>> eventsByEpc,
-                            Set<String> alreadyDetectedEpcIds,
-                            AssetCache assetCache);
+    List<BeAnalysis> detect(
+            Map<String,
+            List<EventHistory>> eventsByEpc,
+            Map<String, List<AnalysisTrip>> tripsByEpc,
+            Set<String> alreadyDetectedEpcIds,
+            AssetCache assetCache
+    );
 
     /**
      * 탐지기의 우선순위를 반환합니다. 숫자가 낮을수록 먼저 실행됩니다.
