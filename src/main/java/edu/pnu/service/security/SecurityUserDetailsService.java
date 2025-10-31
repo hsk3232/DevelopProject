@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepo;
 
 
     //	Spring Security가 인증을 위해 userId로 사용자를 조회할 때 호출하는 메서드
@@ -27,7 +27,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
         log.info("[진입] : [SecurityUserDetailsService] 사용자 정보 조회를 시작합니다. UserID: {}", userId);
 
         // 1. MemberRepository를 사용하여 DB에서 Member 엔티티를 조회
-        Member member = memberRepository.findByUserId(userId).orElseThrow(() -> {
+        Member member = memberRepo.findByUserId(userId).orElseThrow(() -> {
             log.warn("[실패] : [SecurityUserDetailsService] 사용자 [{}] 정보를 찾을 수 없습니다.", userId);
             return new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + userId);
         });

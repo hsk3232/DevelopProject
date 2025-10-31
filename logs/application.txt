@@ -885,3 +885,193 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 	at org.springframework.data.repository.query.parser.PartTree.<init>(PartTree.java:103) ~[spring-data-commons-3.5.2.jar:3.5.2]
 	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:101) ~[spring-data-jpa-3.5.2.jar:3.5.2]
 	... 74 common frames omitted
+2025-11-01T01:19:11.763+09:00  INFO 16748 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : Starting DevelopProjectApplication using Java 17.0.12 with PID 16748 (C:\Users\9191h\Documents\GitHub\DevelopProject\target\classes started by 9191h in C:\Users\9191h\Documents\GitHub\DevelopProject)
+2025-11-01T01:19:11.765+09:00  INFO 16748 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : No active profile set, falling back to 1 default profile: "default"
+2025-11-01T01:19:12.345+09:00  INFO 16748 --- [DevelopProject] [main] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 6 ms.
+2025-11-01T01:19:12.543+09:00  INFO 16748 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-01T01:19:12.644+09:00  INFO 16748 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 94 ms. Found 13 JPA repository interfaces.
+2025-11-01T01:19:13.015+09:00  INFO 16748 --- [DevelopProject] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-11-01T01:19:13.024+09:00  INFO 16748 --- [DevelopProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-01T01:19:13.024+09:00  INFO 16748 --- [DevelopProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-11-01T01:19:13.058+09:00  INFO 16748 --- [DevelopProject] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-01T01:19:13.059+09:00  INFO 16748 --- [DevelopProject] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1260 ms
+2025-11-01T01:19:13.159+09:00  INFO 16748 --- [DevelopProject] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-01T01:19:13.202+09:00  INFO 16748 --- [DevelopProject] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-11-01T01:19:13.223+09:00  INFO 16748 --- [DevelopProject] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-11-01T01:19:13.417+09:00  INFO 16748 --- [DevelopProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-01T01:19:13.451+09:00  INFO 16748 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-11-01T01:19:13.639+09:00  INFO 16748 --- [DevelopProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a8b42a3
+2025-11-01T01:19:13.641+09:00  INFO 16748 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-11-01T01:19:13.683+09:00  WARN 16748 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-01T01:19:13.685+09:00  WARN 16748 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-11-01T01:19:13.705+09:00  INFO 16748 --- [DevelopProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-11-01T01:19:14.422+09:00  INFO 16748 --- [DevelopProject] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-01T01:19:14.559+09:00  INFO 16748 --- [DevelopProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-01T01:19:14.727+09:00  INFO 16748 --- [DevelopProject] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-11-01T01:19:15.767+09:00  INFO 16748 --- [DevelopProject] [main] e.p.s.a.b.s.EpcSerialValidatorService    : EpcSerialValidatorService 초기화 완료. 4개 공장 규칙 로드.
+2025-11-01T01:19:15.806+09:00  INFO 16748 --- [DevelopProject] [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+2025-11-01T01:19:15.841+09:00  INFO 16748 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-11-01T01:19:15.847+09:00  INFO 16748 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-11-01T01:19:16.060+09:00  WARN 16748 --- [DevelopProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-01T01:19:16.092+09:00  INFO 16748 --- [DevelopProject] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name securityUserDetailsService
+2025-11-01T01:19:16.175+09:00  INFO 16748 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [진입] : [WebSocketConfig] WebSocket 엔드포인트 설정을 시작합니다.
+2025-11-01T01:19:16.182+09:00  INFO 16748 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [완료] : [WebSocketConfig] '/webSocket' 엔드포인트가 설정되었습니다.
+2025-11-01T01:19:16.202+09:00 DEBUG 16748 --- [DevelopProject] [main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/webSocket/**] in 'stompWebSocketHandlerMapping'
+2025-11-01T01:19:16.275+09:00 DEBUG 16748 --- [DevelopProject] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2025-11-01T01:19:16.320+09:00 DEBUG 16748 --- [DevelopProject] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-11-01T01:19:16.340+09:00  WARN 16748 --- [DevelopProject] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityFilterChain' defined in class path resource [edu/pnu/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: Cannot invoke "org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration.getAuthenticationManager()" because "this.authenticationConfiguration" is null
+2025-11-01T01:19:16.341+09:00  INFO 16748 --- [DevelopProject] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-01T01:19:16.343+09:00  INFO 16748 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-11-01T01:19:16.347+09:00  INFO 16748 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-11-01T01:19:16.349+09:00  INFO 16748 --- [DevelopProject] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-11-01T01:19:16.356+09:00  INFO 16748 --- [DevelopProject] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-01T01:19:16.369+09:00 ERROR 16748 --- [DevelopProject] [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityFilterChain' defined in class path resource [edu/pnu/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: Cannot invoke "org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration.getAuthenticationManager()" because "this.authenticationConfiguration" is null
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987) ~[spring-context-6.2.9.jar:6.2.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.9.jar:6.2.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.4.jar:3.5.4]
+	at edu.pnu.DevelopProjectApplication.main(DevelopProjectApplication.java:12) ~[classes/:na]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: Cannot invoke "org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration.getAuthenticationManager()" because "this.authenticationConfiguration" is null
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:200) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:89) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:169) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-6.2.9.jar:6.2.9]
+	... 21 common frames omitted
+Caused by: java.lang.NullPointerException: Cannot invoke "org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration.getAuthenticationManager()" because "this.authenticationConfiguration" is null
+	at edu.pnu.config.SecurityConfig.securityFilterChain(SecurityConfig.java:76) ~[classes/:na]
+	at edu.pnu.config.SecurityConfig$$SpringCGLIB$$0.CGLIB$securityFilterChain$1(<generated>) ~[classes/:na]
+	at edu.pnu.config.SecurityConfig$$SpringCGLIB$$FastClass$$1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258) ~[spring-core-6.2.9.jar:6.2.9]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:400) ~[spring-context-6.2.9.jar:6.2.9]
+	at edu.pnu.config.SecurityConfig$$SpringCGLIB$$0.securityFilterChain(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:172) ~[spring-beans-6.2.9.jar:6.2.9]
+	... 24 common frames omitted
+
+2025-11-01T01:32:34.123+09:00  INFO 24992 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : Starting DevelopProjectApplication using Java 17.0.12 with PID 24992 (C:\Users\9191h\Documents\GitHub\DevelopProject\target\classes started by 9191h in C:\Users\9191h\Documents\GitHub\DevelopProject)
+2025-11-01T01:32:34.139+09:00  INFO 24992 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : No active profile set, falling back to 1 default profile: "default"
+2025-11-01T01:32:34.688+09:00  INFO 24992 --- [DevelopProject] [main] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 3 ms.
+2025-11-01T01:32:34.885+09:00  INFO 24992 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-11-01T01:32:34.956+09:00  INFO 24992 --- [DevelopProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 13 JPA repository interfaces.
+2025-11-01T01:32:35.349+09:00  INFO 24992 --- [DevelopProject] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-11-01T01:32:35.360+09:00  INFO 24992 --- [DevelopProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-01T01:32:35.360+09:00  INFO 24992 --- [DevelopProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-11-01T01:32:35.407+09:00  INFO 24992 --- [DevelopProject] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-01T01:32:35.407+09:00  INFO 24992 --- [DevelopProject] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1235 ms
+2025-11-01T01:32:35.556+09:00  INFO 24992 --- [DevelopProject] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-01T01:32:35.609+09:00  INFO 24992 --- [DevelopProject] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-11-01T01:32:35.637+09:00  INFO 24992 --- [DevelopProject] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-11-01T01:32:35.851+09:00  INFO 24992 --- [DevelopProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-11-01T01:32:35.877+09:00  INFO 24992 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-11-01T01:32:36.085+09:00  INFO 24992 --- [DevelopProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4e3ee457
+2025-11-01T01:32:36.088+09:00  INFO 24992 --- [DevelopProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-11-01T01:32:36.121+09:00  WARN 24992 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-01T01:32:36.122+09:00  WARN 24992 --- [DevelopProject] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-11-01T01:32:36.133+09:00  INFO 24992 --- [DevelopProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-11-01T01:32:36.878+09:00  INFO 24992 --- [DevelopProject] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-01T01:32:36.987+09:00  INFO 24992 --- [DevelopProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-11-01T01:32:37.175+09:00  INFO 24992 --- [DevelopProject] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-11-01T01:32:38.079+09:00  INFO 24992 --- [DevelopProject] [main] e.p.s.a.b.s.EpcSerialValidatorService    : EpcSerialValidatorService 초기화 완료. 4개 공장 규칙 로드.
+2025-11-01T01:32:38.112+09:00  INFO 24992 --- [DevelopProject] [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+2025-11-01T01:32:38.136+09:00  INFO 24992 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-11-01T01:32:38.139+09:00  INFO 24992 --- [DevelopProject] [main] .c.a.BatchObservabilityBeanPostProcessor : No Micrometer observation registry found, defaulting to ObservationRegistry.NOOP
+2025-11-01T01:32:38.321+09:00  WARN 24992 --- [DevelopProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-01T01:32:38.346+09:00  INFO 24992 --- [DevelopProject] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name securityUserDetailsService
+2025-11-01T01:32:38.406+09:00  INFO 24992 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [진입] : [WebSocketConfig] WebSocket 엔드포인트 설정을 시작합니다.
+2025-11-01T01:32:38.410+09:00  INFO 24992 --- [DevelopProject] [main] edu.pnu.config.WebSocketConfig           : [완료] : [WebSocketConfig] '/webSocket' 엔드포인트가 설정되었습니다.
+2025-11-01T01:32:38.424+09:00 DEBUG 24992 --- [DevelopProject] [main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/webSocket/**] in 'stompWebSocketHandlerMapping'
+2025-11-01T01:32:38.482+09:00 DEBUG 24992 --- [DevelopProject] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2025-11-01T01:32:38.509+09:00 DEBUG 24992 --- [DevelopProject] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-11-01T01:32:38.558+09:00 DEBUG 24992 --- [DevelopProject] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JWTAuthorizationFilter, JWTAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-11-01T01:32:38.613+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	e.p.c.AdminUserController:
+	
+2025-11-01T01:32:38.613+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	e.p.c.CsvController:
+	
+2025-11-01T01:32:38.613+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	e.p.c.DashboardController:
+	
+2025-11-01T01:32:38.613+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	e.p.c.MemberJoinController:
+	
+2025-11-01T01:32:38.613+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	e.p.c.MemberSettingController:
+	
+2025-11-01T01:32:38.614+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2025-11-01T01:32:38.614+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2025-11-01T01:32:38.614+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2025-11-01T01:32:38.614+09:00 DEBUG 24992 --- [DevelopProject] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2025-11-01T01:32:38.654+09:00 DEBUG 24992 --- [DevelopProject] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-11-01T01:32:38.689+09:00 DEBUG 24992 --- [DevelopProject] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-11-01T01:32:38.886+09:00 DEBUG 24992 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-11-01T01:32:38.887+09:00 DEBUG 24992 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-11-01T01:32:38.887+09:00  INFO 24992 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-11-01T01:32:38.887+09:00 DEBUG 24992 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75d9aae4]
+2025-11-01T01:32:38.887+09:00 DEBUG 24992 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75d9aae4]
+2025-11-01T01:32:38.887+09:00  INFO 24992 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75d9aae4]]
+2025-11-01T01:32:38.888+09:00  INFO 24992 --- [DevelopProject] [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-11-01T01:32:38.888+09:00 DEBUG 24992 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-11-01T01:32:38.888+09:00 DEBUG 24992 --- [DevelopProject] [main] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-11-01T01:32:38.902+09:00  INFO 24992 --- [DevelopProject] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-11-01T01:32:38.909+09:00  INFO 24992 --- [DevelopProject] [main] edu.pnu.DevelopProjectApplication        : Started DevelopProjectApplication in 5.131 seconds (process running for 5.573)
+2025-11-01T01:32:56.373+09:00  INFO 24992 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-11-01T01:32:56.516+09:00  INFO 24992 --- [DevelopProject] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-11-01T01:32:56.516+09:00 DEBUG 24992 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-11-01T01:32:56.516+09:00 DEBUG 24992 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-11-01T01:32:56.516+09:00  INFO 24992 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2025-11-01T01:32:56.516+09:00  INFO 24992 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75d9aae4]]
+2025-11-01T01:32:56.516+09:00 DEBUG 24992 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75d9aae4]
+2025-11-01T01:32:56.516+09:00 DEBUG 24992 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@75d9aae4]
+2025-11-01T01:32:56.516+09:00  INFO 24992 --- [DevelopProject] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2025-11-01T01:32:56.516+09:00 DEBUG 24992 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-11-01T01:32:56.516+09:00 DEBUG 24992 --- [DevelopProject] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-11-01T01:32:56.531+09:00  INFO 24992 --- [DevelopProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-01T01:32:56.531+09:00  INFO 24992 --- [DevelopProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-11-01T01:32:56.531+09:00  INFO 24992 --- [DevelopProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

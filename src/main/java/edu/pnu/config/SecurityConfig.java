@@ -3,6 +3,7 @@ package edu.pnu.config;
 import edu.pnu.config.filter.JWTAuthenticationFilter;
 import edu.pnu.config.filter.JWTAuthorizationFilter;
 import edu.pnu.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +23,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 // --------- Security 보안 규칙, 필터, 인가 정책 ---------//
 
+@RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
 
-    private AuthenticationConfiguration authenticationConfiguration;
-    private MemberRepository memberRepository;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final MemberRepository memberRepo;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -73,11 +75,11 @@ public class SecurityConfig {
 
         // 스프링 시큐리티의 필터체인에 작성한 필터를 추가한다. UsernamePasswordAuthenticationFilter를 상속한 필터이므로
         // 원래 UsernamePasswordAuthenticationFilter가 위치하는 곳에 대신 추가된다.  //토큰에 공장 정보 넣기 위해 Repo 주입
-        http.addFilter(new JWTAuthenticationFilter(authenticationConfiguration.getAuthenticationManager(), memberRepository));
+        http.addFilter(new JWTAuthenticationFilter(authenticationConfiguration.getAuthenticationManager(), memberRepo));
 
-        http.addFilterBefore(new JWTAuthorizationFilter(memberRepository), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JWTAuthorizationFilter(memberRepo), UsernamePasswordAuthenticationFilter.class);
 
-        //http.addFilterBefore(new JWTAuthorizationFilter(memberRepository), AuthorizationFilter.class);
+        //http.addFilterBefore(new JWTAuthorizationFilter(memberRepo), AuthorizationFilter.class);
 
         // CORS 설정을 필터 체인에 적용
         http.cors(cors -> cors.configurationSource(corsSource()));
