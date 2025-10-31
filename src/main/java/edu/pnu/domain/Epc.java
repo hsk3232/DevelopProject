@@ -1,8 +1,5 @@
 package edu.pnu.domain;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +16,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -51,7 +51,7 @@ public class Epc {
 	//N:1에서 N은 자식이며, 관계의 주인!
 	@ManyToOne(fetch = FetchType.LAZY) // FK
 	@JoinColumn(name = "file_id", nullable = false)
-	private Csv csv;
+	private CsvFile csvFile;
 	
 	private LocalDateTime manufactureDate;
 	private LocalDate expiryDate;

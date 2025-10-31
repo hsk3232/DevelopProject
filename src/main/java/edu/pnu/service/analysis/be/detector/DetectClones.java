@@ -1,6 +1,6 @@
 package edu.pnu.service.analysis.be.detector;
 
-import edu.pnu.domain.AnalysisTrip;
+import edu.pnu.domain.CsvRoute;
 import edu.pnu.domain.BeAnalysis;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.service.analysis.be.api.BeDetector;
@@ -26,7 +26,7 @@ public class DetectClones implements BeDetector {
 
     @Override
     public List<BeAnalysis> detect(Map<String, List<EventHistory>> eventsByEpc,
-                                   Map<String, List<AnalysisTrip>> tripsByEpc,
+                                   Map<String, List<CsvRoute>> tripsByEpc,
                                    Set<String> alreadyDetectedEpcIds,
                                    AssetCache assetCache) {
 
@@ -38,7 +38,7 @@ public class DetectClones implements BeDetector {
         }
 
         // EPC별 분석
-        for (Map.Entry<String, List<AnalysisTrip>> entry : tripsByEpc.entrySet()) {
+        for (Map.Entry<String, List<CsvRoute>> entry : tripsByEpc.entrySet()) {
             String epcCode = entry.getKey();
             if (epcCode == null) continue;
 
@@ -47,14 +47,14 @@ public class DetectClones implements BeDetector {
                 continue;
             }
 
-            List<AnalysisTrip> trips = entry.getValue();
+            List<CsvRoute> trips = entry.getValue();
             if (trips == null || trips.isEmpty()) continue;
 
             // 중요: trips가 시간순으로 정렬되어 있지 않을 수 있으므로, fromEventTime을 기준으로 null-safe 정렬
-            trips.sort(Comparator.comparing(AnalysisTrip::getFromEventTime,
+            trips.sort(Comparator.comparing(CsvRoute::getFromEventTime,
                     Comparator.nullsLast(Comparator.naturalOrder())));
 
-            for (AnalysisTrip trip : trips) {
+            for (CsvRoute trip : trips) {
                 if (trip == null) continue;
 
                 Long fromLocId = trip.getFromLocationId();

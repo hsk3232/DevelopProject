@@ -1,6 +1,6 @@
 package edu.pnu.dto;
 
-import edu.pnu.domain.Csv;
+import edu.pnu.domain.CsvFile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,7 +32,7 @@ public class CsvFileDTO {
         private Long fileSize;
         private LocalDateTime createdAt;
 
-        public static FileInfo from(Csv c) {
+        public static FileInfo from(CsvFile c) {
             return FileInfo.builder()
                     .fileId(c.getFileId())
                     .fileName(c.getFileName())
@@ -57,7 +57,7 @@ public class CsvFileDTO {
         private List<FileInfo> data;
         private Long nextCursor;
 
-        public static FileListResponse from(List<Csv> csvList, Long nextCursor) {
+        public static FileListResponse from(List<CsvFile> csvList, Long nextCursor) {
             List<FileInfo> fileInfos = csvList.stream()
                     .map(FileInfo::from)
                     .collect(Collectors.toList());

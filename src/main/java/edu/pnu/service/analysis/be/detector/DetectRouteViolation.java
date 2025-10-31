@@ -1,6 +1,6 @@
 package edu.pnu.service.analysis.be.detector;
 
-import edu.pnu.domain.AnalysisTrip;
+import edu.pnu.domain.CsvRoute;
 import edu.pnu.domain.BeAnalysis;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.service.analysis.be.api.BeDetector;
@@ -23,7 +23,7 @@ public class DetectRouteViolation implements BeDetector {
 
     @Override
     public List<BeAnalysis> detect(Map<String, List<EventHistory>> eventsByEpc,
-                                   Map<String, List<AnalysisTrip>> tripsByEpc,
+                                   Map<String, List<CsvRoute>> tripsByEpc,
                                    Set<String> alreadyDetectedEpcIds,
                                    AssetCache assetCache) {
         List<BeAnalysis> results = new ArrayList<>();
@@ -73,7 +73,7 @@ public class DetectRouteViolation implements BeDetector {
                     BeAnalysis anomaly = new BeAnalysis();
                     anomaly.setEventHistory(toEvent);
                     anomaly.setAnomalyType("Tamper");
-                    anomaly.setAnomalyDetailedType("Route Violation");
+                    anomaly.setAnomalyDetailedType("Route");
                     anomaly.setAnalyzedAt(java.time.LocalDateTime.now());
                     results.add(anomaly);
 

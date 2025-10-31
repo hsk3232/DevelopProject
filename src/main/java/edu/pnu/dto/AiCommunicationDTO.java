@@ -1,16 +1,16 @@
 package edu.pnu.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 
 public class AiCommunicationDTO {
 
@@ -20,7 +20,8 @@ public class AiCommunicationDTO {
 	@Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class EventData { // 기존 ExportEventHistoryDTO
+    // 기존 ExportEventHistoryDTO
+	public static class EventData {
 		private Long eventId;
 		private Long locationId;
 		private String businessStep;
@@ -32,7 +33,8 @@ public class AiCommunicationDTO {
 	@Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class ExportRequest { // 기존 ExportDataToAiDTO
+    // 기존 ExportDataToAiDTO
+	public static class ExportRequest {
 		private String epcCode;
 		private List<EventData> events;
 	}

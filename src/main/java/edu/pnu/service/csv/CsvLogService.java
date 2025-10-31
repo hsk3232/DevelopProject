@@ -1,9 +1,9 @@
 package edu.pnu.service.csv;
 
-import edu.pnu.domain.Csv;
+import edu.pnu.domain.CsvFile;
 import edu.pnu.dto.CsvFileDTO;
 import edu.pnu.exception.CsvFileNotFoundException;
-import edu.pnu.repository.CsvRepository;
+import edu.pnu.repository.CsvRouteRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class CsvLogService {
-    private final CsvRepository csvRepository;
+    private final CsvRouteRepository csvRepository;
 
 
     @Transactional(readOnly = true)
@@ -33,7 +33,7 @@ public class CsvLogService {
 
 
         // findCsvListByCriteria 메서드를 호출하여 List<Csv> 타입의 csvList 변수에 결과를 할당
-        List<Csv> csvList = csvRepository.findCsvListByCriteria(locationId, cursor, search, pageable);
+        List<CsvFile> csvList = csvRepository.findCsvListByCriteria(locationId, cursor, search, pageable);
 
         Long nextCursor = null;
         if (!csvList.isEmpty() && csvList.size() == size) {
@@ -46,7 +46,7 @@ public class CsvLogService {
 
     // 업로한 CSV 파일 재다운 로드
     public Resource loadCsvResource(Long fileId) {
-        Csv csv = findCsvById(fileId);
+        CsvFile csv = findCsvById(fileId);
         try {
             Path filePath = Paths.get(csv.getFilePath()).resolve(csv.getSavedFileName()).normalize();
             Resource resource = new UrlResource(filePath.toUri());
@@ -66,7 +66,7 @@ public class CsvLogService {
     }
 
     // file ID 검색
-    private Csv findCsvById(Long fileId) {
+    private CsvFile findCsvById(Long fileId) {
         return csvRepository.findById(fileId)
                 .orElseThrow(() -> new CsvFileNotFoundException("요청된 파일 ID를 찾을 수 없습니다: " + fileId));
     }

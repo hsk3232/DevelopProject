@@ -1,6 +1,6 @@
 package edu.pnu.service.analysis.be.detector;
 
-import edu.pnu.domain.AnalysisTrip;
+import edu.pnu.domain.CsvRoute;
 import edu.pnu.domain.BeAnalysis;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.service.analysis.be.api.BeDetector;
@@ -29,7 +29,7 @@ public class DetectProductMismatch implements BeDetector {
     @Override
     public List<BeAnalysis> detect(
             Map<String, List<EventHistory>> eventsByEpc,
-            Map<String, List<AnalysisTrip>> tripsByEpc,
+            Map<String, List<CsvRoute>> tripsByEpc,
             Set<String> alreadyDetectedEpcIds,
             AssetCache assetCache) {
 

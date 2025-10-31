@@ -24,7 +24,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Builder
-@Table(name ="csvproduct", uniqueConstraints = {
+@Table(uniqueConstraints = {
 	    @UniqueConstraint(
 	    	      name="uq_csvProduct",
 	    	      columnNames = {"file_id", "epc_company", "epc_product"}) // 파일 내 동일 상품 코드 조합 중복 금지 	  
@@ -32,15 +32,15 @@ import lombok.ToString;
 public class CsvProduct {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private Long productId;
-	private String epcProduct; // 상품코드
-	private String epcCompany; // 제조사 코드
-	private String productName; // 상품명
+    @Column(name = "csv_product_id")
+    private Long csvProductId;
+	private String csvEpcProduct; // 상품코드
+	private String csvEpcCompany; // 제조사 코드
+	private String csvProductName; // 상품명
 	
 	//N:1 여러개의 epc_code가 하나의 상품에 있을 수 있음.
 	//N:1에서 N은 자식이며, 관계의 주인!
 	@ManyToOne(fetch = FetchType.LAZY) // FK
 	@JoinColumn(name = "file_id")
-	private Csv csv;
+	private CsvFile csv;
 }

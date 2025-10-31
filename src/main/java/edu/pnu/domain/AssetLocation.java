@@ -2,7 +2,6 @@ package edu.pnu.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +16,6 @@ import lombok.ToString;
 @ToString
 @Entity
 @Builder
-@Table(name ="assetlocation")
 public class AssetLocation {
 	@Id
 	private Long locationId; //location_id

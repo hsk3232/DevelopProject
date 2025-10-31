@@ -1,9 +1,5 @@
 package edu.pnu.domain;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +15,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,7 +26,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Builder
-public class Csv {
+public class CsvFile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long fileId;

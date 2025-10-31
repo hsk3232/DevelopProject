@@ -22,16 +22,16 @@ import lombok.ToString;
 @ToString
 @Entity
 @Builder
-@Table(name ="csvlocation", uniqueConstraints = {
+@Table(uniqueConstraints = {
 	    @UniqueConstraint(
 	    		name="uq_csvLocation_fileId_locationId", 
-	    		columnNames = {"file_id", "location_id"} // 파일 내 동일 위치명 중복 금지
+	    		columnNames = {"file_id", "csv_location_id"} // 파일 내 동일 위치명 중복 금지
 	    		)
 	    }) 
 public class CsvLocation {
 	@Id
-	@Column(name="location_id", nullable=false)
-	private Long locationId; //location_id
+	@Column(name="csv_location_id", nullable=false)
+	private Long csvLocationId; //location_id
 	
 	private String scanLocation; //location name
 	
@@ -42,5 +42,5 @@ public class CsvLocation {
 	//N:1에서 N은 자식이며, 관계의 주인!
 	@ManyToOne(fetch = FetchType.LAZY) // FK
 	@JoinColumn(name = "file_id")
-	private Csv csv;
+	private CsvFile csvFile;
 }

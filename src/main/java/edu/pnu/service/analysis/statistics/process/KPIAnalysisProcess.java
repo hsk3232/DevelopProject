@@ -1,14 +1,14 @@
 package edu.pnu.service.analysis.statistics.process;
 
 import edu.pnu.domain.AnalysisSummary;
-import edu.pnu.domain.AnalysisTrip;
-import edu.pnu.domain.Csv;
+import edu.pnu.domain.CsvRoute;
+import edu.pnu.domain.CsvFile;
 import edu.pnu.exception.CsvFileNotFoundException;
 import edu.pnu.repository.AiAnalysisRepository;
 import edu.pnu.repository.AnalysisSummaryRepository;
 import edu.pnu.repository.AnalysisTripRepository;
 import edu.pnu.repository.BeAnalysisRepository;
-import edu.pnu.repository.CsvRepository;
+import edu.pnu.repository.CsvRouteRepository;
 import edu.pnu.service.analysis.statistics.api.StatisticsInterface;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class KPIAnalysisProcess implements StatisticsInterface {
     private final AnalysisTripRepository analysisTripRepo;
     private final AiAnalysisRepository aiAnalysisRepo;
     private final BeAnalysisRepository beAnalysisRepo;
-    private final CsvRepository csvRepo;
+    private final CsvRouteRepository csvRepo;
 
     @Override
     public String getProcessorName() {
@@ -42,12 +42,13 @@ public class KPIAnalysisProcess implements StatisticsInterface {
     @Override
     @Transactional
     public void process(Long fileId) {
-        Csv csv = csvRepo.findById(fileId)
+        CsvFile csv = csvRepo.findById(fileId)
                 .orElseThrow(() -> new CsvFileNotFoundException("Csv not found: " + fileId));
 
         long totalTripCount = analysisTripRepo.countByEpc_Csv_FileId(fileId);
         long beAnomalyCount = beAnalysisRepo.countByEventHistory_Csv_FileId(fileId);
         long aiAnomalyCount = aiAnalysisRepo.countByEventHistory_Csv_FileId(fileId);
+
         double avgLeadTime = computeAverageLeadTimeSeconds(fileId);
 
         AnalysisSummary summary = analysisSummaryRepo.findById(fileId)
@@ -63,8 +64,8 @@ public class KPIAnalysisProcess implements StatisticsInterface {
 
     private double computeAverageLeadTimeSeconds(Long fileId) {
         long n = 0, sum = 0;
-        try (Stream<AnalysisTrip> s = analysisTripRepo.streamByEpc_Csv_FileId(fileId)) {
-            for (AnalysisTrip t : (Iterable<AnalysisTrip>) s::iterator) {
+        try (Stream<CsvRoute> s = analysisTripRepo.streamByEpc_Csv_FileId(fileId)) {
+            for (CsvRoute t : (Iterable<CsvRoute>) s::iterator) {
                 if (t.getFromEventTime() != null && t.getToEventTime() != null) {
                     sum += Duration.between(t.getFromEventTime(), t.getToEventTime()).getSeconds();
                     n++;

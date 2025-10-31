@@ -2,11 +2,11 @@ package edu.pnu.service.analysis.ai;
 
 import edu.pnu.config.AiClientProperties;
 import edu.pnu.domain.AiAnalysis;
-import edu.pnu.domain.Csv;
+import edu.pnu.domain.CsvFile;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.dto.AiCommunicationDTO;
 import edu.pnu.repository.AiAnalysisRepository;
-import edu.pnu.repository.CsvRepository;
+import edu.pnu.repository.CsvRouteRepository;
 import edu.pnu.repository.EventHistoryRepository;
 import edu.pnu.service.messaging.WebSocketService;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequiredArgsConstructor
 public class AiAnalysisService {
 
-    private final CsvRepository csvRepo;
+    private final CsvRouteRepository csvRepo;
     private final EventHistoryRepository eventHistoryRepo;
     private final AiAnalysisRepository aiAnalysisRepo;
     private final WebSocketService webSocketService;
@@ -50,7 +50,7 @@ public class AiAnalysisService {
     public void autoSendLatestFile() {
         log.warn("[진입] : [AiAnalysisService] AI로 DB 전송 시작");
         Long lastFileId = csvRepo.findTopByOrderByFileIdDesc()
-                .map(Csv::getFileId).orElse(null);
+                .map(CsvFile::getFileId).orElse(null);
         if (lastFileId == null) {
             log.warn("[AI] CSV 파일이 없습니다.");
             return;
@@ -101,7 +101,7 @@ public class AiAnalysisService {
     //   6) 배치 간 딜레이/재시도는 설정 값(aiClientProperties) 사용
     @Transactional  // 반드시 readOnly = false 또는 생략!
     public void sendAndReceiveFromAi(Long fileId) {
-        Csv csv = csvRepo.findById(fileId)
+        CsvFile csv = csvRepo.findById(fileId)
                 .orElseThrow(() -> new IllegalArgumentException("Csv not found: " + fileId));
         final String userId = csv.getMember() != null ? csv.getMember().getUserId() : null;
 

@@ -1,6 +1,6 @@
 package edu.pnu.service.analysis.trips;
 
-import edu.pnu.domain.AnalysisTrip;
+import edu.pnu.domain.CsvRoute;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.repository.AnalysisTripRepository;
 import edu.pnu.repository.EventHistoryRepository;
@@ -38,7 +38,7 @@ public class AnalysisTripGenerationService {
         final int[] totalSavedCount = {0};
         // 이전 이벤트를 추적하기 위한 상태 변수. EPC가 바뀔 때마다 초기화됨.
         final EventHistory[] previousEventContainer = new EventHistory[1];
-        List<AnalysisTrip> tripBatch = new ArrayList<>(BATCH_SIZE);
+        List<CsvRoute> tripBatch = new ArrayList<>(BATCH_SIZE);
 
         log.debug("EventHistory 스트림 조회를 시작");
         // try-with-resources 구문으로 안전하게 스트림을 사용
@@ -52,7 +52,7 @@ public class AnalysisTripGenerationService {
                 if (previousEvent != null && previousEvent.getEpc().getEpcId().equals(currentEvent.getEpc().getEpcId())) {
 
                     // 버전 2의 새로운 AnalysisTrip 엔티티를 생성합니다.
-                    AnalysisTrip trip = AnalysisTrip.builder()
+                    CsvRoute trip = CsvRoute.builder()
                             .epc(currentEvent.getEpc()) // EPC 엔티티 참조
                             .fromLocationId(previousEvent.getCsvLocation().getLocationId())
                             .toLocationId(currentEvent.getCsvLocation().getLocationId())
@@ -86,7 +86,7 @@ public class AnalysisTripGenerationService {
     }
 
     // JPA를 이용한 배치 저장 및 영속성 컨텍스트 관리 헬퍼 메서드
-    private void saveBatchAndClear(List<AnalysisTrip> trips, int[] total) {
+    private void saveBatchAndClear(List<CsvRoute> trips, int[] total) {
         analysisTripRepo.saveAll(trips);
         analysisTripRepo.flush();
         entityManager.clear();

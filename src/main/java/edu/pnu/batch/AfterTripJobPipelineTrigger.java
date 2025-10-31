@@ -1,6 +1,6 @@
 package edu.pnu.batch;
 
-import edu.pnu.repository.CsvRepository;
+import edu.pnu.repository.CsvRouteRepository;
 import edu.pnu.service.analysis.AnalysisPipelineService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AfterTripJobPipelineTrigger implements JobExecutionListener {
     private final AnalysisPipelineService analysisPipelineService;
-    private final CsvRepository csvRepository;
+    private final CsvRouteRepository csvRepository;
 
     @Override
     public void afterJob(JobExecution jobExecution) {

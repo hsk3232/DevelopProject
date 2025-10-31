@@ -1,7 +1,7 @@
 package edu.pnu.service.csv;
 
 import edu.pnu.config.CustomUserDetails;
-import edu.pnu.domain.Csv;
+import edu.pnu.domain.CsvFile;
 import edu.pnu.domain.CsvLocation;
 import edu.pnu.domain.CsvProduct;
 import edu.pnu.domain.Epc;
@@ -15,7 +15,7 @@ import edu.pnu.exception.FileUploadException;
 import edu.pnu.exception.InvalidCsvFormatException;
 import edu.pnu.repository.CsvLocationRepository;
 import edu.pnu.repository.CsvProductRepository;
-import edu.pnu.repository.CsvRepository;
+import edu.pnu.repository.CsvRouteRepository;
 import edu.pnu.repository.EpcRepository;
 import edu.pnu.repository.MemberRepository;
 import edu.pnu.service.messaging.WebSocketService;
@@ -63,7 +63,7 @@ public class CsvSaveService {
 
     private final CsvProductRepository csvProductRepo;
     private final CsvLocationRepository csvLocationRepo;
-    private final CsvRepository csvRepo;
+    private final CsvRouteRepository csvRepo;
     private final EpcRepository epcRepo;
     private final MemberRepository memberRepo;
 
@@ -93,7 +93,7 @@ public class CsvSaveService {
         // [file 확장자 검사] .csv 여부 확인
         validateFile(file);
 
-        final Csv csv = createAndSaveCsvMetadata(file, member);
+        final CsvFile csv = createAndSaveCsvMetadata(file, member);
         webSocketService.sendMessage(userId, "[1단계/CSV] INFO  - 메타데이터 저장 완료 (fileId=" + csv.getFileId() + ")");
 
         // [CSV Meta 정보 저장]
@@ -126,7 +126,7 @@ public class CsvSaveService {
 
     // ■■■■■■■■■■■■■■ [ 2~4단계: 동기 저장 ] ■■■■■■■■■■■■■
     // 저장된 CSV 파일을 청크 단위로 읽어 파싱하고 각 청크를 처리하기 위해 processChunk를 호출
-    private Map<String, List<Integer>> parseAndProcessFile(Csv csv, ImportCache cache, String userId) {
+    private Map<String, List<Integer>> parseAndProcessFile(CsvFile csv, ImportCache cache, String userId) {
         final Map<String, List<Integer>> errorRows = new HashMap<>();
         final Path path = Paths.get(fileUploadDir, csv.getSavedFileName());
 
@@ -185,7 +185,7 @@ public class CsvSaveService {
     // 하나의 청크를 파싱하여 Location/Product/EPC를 수집·중복제거하고, 엔티티를 배치로 저장한 뒤 EventHistory를 생성
     private void processChunk(List<String[]> chunk,
                               Map<String, Integer> colIdx,
-                              Csv csv,
+                              CsvFile csv,
                               Map<String, List<Integer>> errorRows,
                               int startRowNum,
                               ImportCache cache,
@@ -205,7 +205,7 @@ public class CsvSaveService {
             Long locationId = parseLongSafe(getValue(colIdx, row, "location_id"));
             if (locationId != null && cache.locationIds.add(locationId)) {
                 newLocations.add(CsvLocation.builder()
-                        .csv(csv)
+                        .csvFile(csv)
                         .locationId(locationId)
                         .scanLocation(getValue(colIdx, row, "scan_location"))
                         .operatorId(parseLongSafe(getValue(colIdx, row, "operator_id")))
@@ -234,7 +234,7 @@ public class CsvSaveService {
             String epcCode = getValue(colIdx, row, "epc_code");
             if (epcCode != null && cache.epcCodes.add(epcCode)) {
                 newEpcs.add(Epc.builder()
-                        .csv(csv)
+                        .csvFile(csv)
                         .epcCode(epcCode)
                         .epcHeader(getValue(colIdx, row, "epc_header"))
                         .epcLot(getValue(colIdx, row, "epc_lot"))
@@ -313,7 +313,7 @@ public class CsvSaveService {
                     && seenEventKeys.add(keyHash)) {
 
                 newEvents.add(EventHistory.builder()
-                        .csv(csv)
+                        .csvFile(csv)
                         .epc(epc)
                         .csvProduct(product)
                         .csvLocation(locationRef)
@@ -349,11 +349,11 @@ public class CsvSaveService {
     }
 
     // [CSV Meta 정보 저장] : 업로드 파일의 메타데이터(Csv 엔티티)를 생성·DB에 저장하고 저장된 Csv를 반환
-    private Csv createAndSaveCsvMetadata(MultipartFile file, Member member) {
+    private CsvFile createAndSaveCsvMetadata(MultipartFile file, Member member) {
         log.debug("[3] [CsvSaveService] [진입] : [createAndSaveCsvMetadata] CSV Meta 정보 저장 진입");
         String originalFileName = file.getOriginalFilename();
         String savedFileName = UUID.randomUUID() + ".csv";
-        Csv csv = Csv.builder()
+        CsvFile csv = CsvFile.builder()
                 .fileName(originalFileName)
                 .savedFileName(savedFileName)
                 .filePath(fileUploadDir)
@@ -365,15 +365,15 @@ public class CsvSaveService {
     }
 
     // [파일 저장] : 업로드된 MultipartFile을 지정된 디스크 위치(fileUploadDir)에 저장
-    private void storeFileToDisk(MultipartFile file, Csv csv) {
+    private void storeFileToDisk(MultipartFile file, CsvFile csvFile) {
         try {
             log.debug("[4] [CsvSaveService] [진입] : [storeFileToDisk] BE 서버에 저장 진입");
-            Path targetLocation = Paths.get(fileUploadDir).resolve(csv.getSavedFileName());
+            Path targetLocation = Paths.get(fileUploadDir).resolve(csvFile.getSavedFileName());
             Files.createDirectories(targetLocation.getParent());
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             log.debug("[4] [CsvSaveService] [완료] : [storeFileToDisk] BE 서버에 저장 완료");
         } catch (IOException e) {
-            log.error("[4] [CsvSaveService] [진입] : [storeFileToDisk] 파일 저장 실패: {}", csv.getSavedFileName(), e);
+            log.error("[4] [CsvSaveService] [진입] : [storeFileToDisk] 파일 저장 실패: {}", csvFile.getSavedFileName(), e);
             throw new CsvFileSaveToDiskException("파일을 디스크에 저장하는 데 실패했습니다.");
         }
     }

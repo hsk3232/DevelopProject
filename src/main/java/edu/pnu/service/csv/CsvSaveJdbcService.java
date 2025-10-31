@@ -39,7 +39,7 @@ public class CsvSaveJdbcService {
             @Override
             public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 CsvLocation l = locations.get(i);
-                ps.setLong(1, l.getCsv().getFileId());
+                ps.setLong(1, l.getCsvFile().getFileId());
                 ps.setLong(2, l.getLocationId());
                 ps.setString(3, l.getScanLocation());
                 ps.setObject(4, l.getOperatorId(), Types.BIGINT);
@@ -91,7 +91,7 @@ public class CsvSaveJdbcService {
             @Override
             public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 Epc e = epcs.get(i);
-                ps.setLong(1, e.getCsv().getFileId());
+                ps.setLong(1, e.getCsvFile().getFileId());
                 ps.setString(2, e.getEpcCode());
                 ps.setString(3, e.getEpcHeader());
                 ps.setString(4, e.getEpcLot());
@@ -121,7 +121,7 @@ public class CsvSaveJdbcService {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 EventHistory eh = events.get(i);
-                ps.setLong(1, eh.getCsv().getFileId());
+                ps.setLong(1, eh.getCsvFile().getFileId());
                 ps.setLong(2, eh.getEpc().getEpcId()); // epc_code 대신 epc_id
                 ps.setLong(3, eh.getCsvLocation().getLocationId()); // location_id 대신 csv_location_id
                 ps.setLong(4, eh.getCsvProduct().getProductId()); // 새로 추가된 product_id

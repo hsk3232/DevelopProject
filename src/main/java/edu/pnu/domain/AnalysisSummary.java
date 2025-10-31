@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +21,6 @@ import lombok.ToString;
 @ToString
 @Entity
 @Builder
-@Table(name="analysissummary")
 public class AnalysisSummary  {
 	
 	@Id
@@ -33,7 +31,7 @@ public class AnalysisSummary  {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId // Csv의 id를 이 엔티티의 id로 매핑
 	@JoinColumn(name="file_id")
-	private Csv csv;
+	private CsvFile csvFile;
 	
 	
 //	 ■■■■■■■■■■■■ [ KPI 통계 정보 ] ■■■■■■■■■■■■
@@ -50,7 +48,7 @@ public class AnalysisSummary  {
 //	 ■■■■■■■■■■■■ [ BE 분석 통계 정보 ] ■■■■■■■■■■■■
     // 기존 FileAnomalyStats 역할. 2가지로 확대
 	@Builder.Default
-	private int totalErrorCount = 0;
+	private int beTotalAnomalyCount = 0;
 	
 	@Builder.Default
 	private int fakeCount = 0;

@@ -1,6 +1,6 @@
 package edu.pnu.service.analysis.be;
 
-import edu.pnu.domain.AnalysisTrip;
+import edu.pnu.domain.CsvRoute;
 import edu.pnu.domain.BeAnalysis;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.repository.AnalysisTripRepository;
@@ -46,8 +46,8 @@ public class BeAnalysisService {
         }
 
         // [수정됨] AnalysisTrip 데이터도 미리 로드하여 EPC별로 그룹화합니다.
-        Map<String, List<AnalysisTrip>> tripsByEpc = new HashMap<>();
-        try (Stream<AnalysisTrip> s = analysisTripRepo.streamByEpc_Csv_FileId(fileId)) {
+        Map<String, List<CsvRoute>> tripsByEpc = new HashMap<>();
+        try (Stream<CsvRoute> s = analysisTripRepo.streamByEpc_Csv_FileId(fileId)) {
             s.forEach(t -> tripsByEpc.computeIfAbsent(t.getEpc().getEpcCode(), k -> new ArrayList<>()).add(t));
         }
 

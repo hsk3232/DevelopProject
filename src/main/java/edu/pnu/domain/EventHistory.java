@@ -26,17 +26,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"csv", "epc", "csvLocation", "csvProduct"})
+@ToString(exclude = {"csvFile", "epc", "csvLocation", "csvProduct"})
 @Entity
 
-@Table(name = "eventhistory",
+@Table(
         // 비즈니스 규칙: 특정 파일의, 특정 EPC는, 특정 시간, 특정 위치, 특정 이벤트 타입을 중복으로 가질 수 없음.
         // 이 제약조건은 event_id를 제외한 완벽하게 동일한 이벤트 데이터의 중복 삽입을 방지
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "uq_prevent_duplicate_event_history",
                         columnNames = {
-                                "file_id", "epc_id", "csv_location_id", "product_id",
+                                "file_id", "epc_id", "csv_location_id", "csv_product_id",
                                 "event_time", "business_step", "event_type"
                         }
                 )
@@ -56,7 +56,7 @@ public class EventHistory {
     // 파일 스코프 기준 키 (필수)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "file_id", nullable = false)
-    private Csv csv;
+    private CsvFile csvFile;
 
     // ★ 유일한 '복합 FK' 한 곳: (file_id, epc_id) -> epc(file_id, epc_id)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -66,13 +66,13 @@ public class EventHistory {
     })
     private Epc epc;
 
-    // 위치/상품은 단일 FK로 단순화 (방법 A)
+    // 위치/상품은 단일 FK로 단순화
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "csv_location_id", nullable = false)
     private CsvLocation csvLocation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "csv_product_id", nullable = false)
     private CsvProduct csvProduct;
 
     @Column(name = "hub_type")

@@ -1,7 +1,7 @@
 package edu.pnu.repository;
 
 
-import edu.pnu.domain.Csv;
+import edu.pnu.domain.CsvFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +11,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface CsvRepository extends JpaRepository<Csv, Long> {
+public interface CsvRouteRepository extends JpaRepository<CsvFile, Long> {
     @Query("""
                 SELECT c
-                FROM Csv c
+                FROM CsvFile c
                 JOIN FETCH c.member m
                 WHERE
                     m.assetLocation.locationId = :locationId
@@ -22,14 +22,14 @@ public interface CsvRepository extends JpaRepository<Csv, Long> {
                     AND (:search IS NULL OR LOWER(c.fileName) LIKE LOWER(CONCAT('%', :search, '%')))
                 ORDER BY c.fileId DESC
             """)
-    List<Csv> findCsvListByCriteria(
+    List<CsvFile> findCsvListByCriteria(
             @Param("locationId") Long locationId,
             @Param("cursor") Long cursor,
             @Param("search") String search,
             Pageable pageable);
 
     // DataShareService에서 가장 최근 파일을 찾기 위한 쿼리
-    Optional<Csv> findTopByOrderByFileIdDesc();
+    Optional<CsvFile> findTopByOrderByFileIdDesc();
 
 
 }
