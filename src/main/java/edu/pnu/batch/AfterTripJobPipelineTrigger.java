@@ -1,6 +1,6 @@
 package edu.pnu.batch;
 
-import edu.pnu.repository.CsvRouteRepository;
+import edu.pnu.repository.CsvFileRepository;
 import edu.pnu.service.analysis.AnalysisPipelineService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AfterTripJobPipelineTrigger implements JobExecutionListener {
     private final AnalysisPipelineService analysisPipelineService;
-    private final CsvRouteRepository csvRepository;
+    private final CsvFileRepository csvFileRepo;
 
     @Override
     public void afterJob(JobExecution jobExecution) {
@@ -28,7 +28,7 @@ public class AfterTripJobPipelineTrigger implements JobExecutionListener {
         if (fileId == null) return;
 
         // 업로더 userId 조회(웹소켓 채널 지정용)
-        String userId = csvRepository.findById(fileId)
+        String userId = csvFileRepo.findById(fileId)
                 .map(c -> c.getMember().getUserId())
                 .orElse(null);
 

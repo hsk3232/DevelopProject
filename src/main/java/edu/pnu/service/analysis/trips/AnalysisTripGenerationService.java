@@ -2,7 +2,7 @@ package edu.pnu.service.analysis.trips;
 
 import edu.pnu.domain.CsvRoute;
 import edu.pnu.domain.EventHistory;
-import edu.pnu.repository.AnalysisTripRepository;
+import edu.pnu.repository.CsvRouteRepository;
 import edu.pnu.repository.EventHistoryRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class AnalysisTripGenerationService {
      * From, To 형식으로 DB화함.
      * */
     private static final int BATCH_SIZE = 1000; // 배치 크기
-    private final AnalysisTripRepository analysisTripRepo;
+    private final CsvRouteRepository analysisTripRepo;
     private final EventHistoryRepository eventHistoryRepo;
     private final EntityManager entityManager;
 

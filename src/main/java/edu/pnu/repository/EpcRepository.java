@@ -1,5 +1,7 @@
 package edu.pnu.repository;
 
+import edu.pnu.domain.Epc;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,8 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import edu.pnu.domain.Epc;
-
 public interface EpcRepository extends JpaRepository<Epc, Long> {
     
 	// CsvSaveService.postCsvAndTriggerAsyncProcessing()
@@ -18,7 +18,7 @@ public interface EpcRepository extends JpaRepository<Epc, Long> {
     @Query("""
     		SELECT e.epcCode 
     		FROM Epc e 
-    		WHERE e.csv.fileId = :fileId
+    		WHERE e.csvFile.fileId = :fileId
     		""")
     Set<String> findAllEpcCodesByFileId(@Param("fileId") Long fileId);
     
@@ -28,7 +28,7 @@ public interface EpcRepository extends JpaRepository<Epc, Long> {
     @Query("""
     		SELECT e.epcCode, e 
     		FROM Epc e 
-    		WHERE e.csv.fileId = :fileId
+    		WHERE e.csvFile.fileId = :fileId
     		""")
     List<Object[]> findAllByFileIdForMap(@Param("fileId") Long fileId);
 

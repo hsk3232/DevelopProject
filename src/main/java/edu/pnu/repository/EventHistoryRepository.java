@@ -14,7 +14,7 @@ public interface EventHistoryRepository extends JpaRepository<EventHistory, Long
     @Query("""
             SELECT eh
             FROM EventHistory eh
-            WHERE eh.csv.fileId = :fileId
+            WHERE eh.csvFile.fileId = :fileId
             ORDER BY eh.epc.epcId, eh.eventTime
             
             """)
@@ -27,7 +27,7 @@ public interface EventHistoryRepository extends JpaRepository<EventHistory, Long
             JOIN FETCH eh.epc e
             JOIN FETCH eh.csvProduct p
             JOIN FETCH eh.csvLocation l
-            WHERE eh.csv.fileId = :fileId
+            WHERE eh.csvFile.fileId = :fileId
             ORDER BY eh.epc.epcId, eh.eventTime
             """)
     List<EventHistory> findAllWithDetailsByFileId(@Param("fileId") Long fileId);
@@ -38,7 +38,7 @@ public interface EventHistoryRepository extends JpaRepository<EventHistory, Long
     @Query("SELECT eh FROM EventHistory eh " +
             "JOIN FETCH eh.epc " + // eh와 연관된 epc를 즉시 로딩
             "JOIN FETCH eh.csvLocation " + // eh와 연관된 csvLocation을 즉시 로딩
-            "WHERE eh.csv.fileId = :fileId " +
+            "WHERE eh.csvFile.fileId = :fileId " +
             "ORDER BY eh.epc.epcId ASC, eh.eventTime ASC")
     Stream<EventHistory> streamWithDetailsByFileId(@Param("fileId") Long fileId);
 
@@ -48,7 +48,7 @@ public interface EventHistoryRepository extends JpaRepository<EventHistory, Long
             FROM EventHistory eh
             JOIN FETCH eh.epc e
             JOIN FETCH eh.csvLocation l
-            WHERE eh.csv.fileId = :fileId
+            WHERE eh.csvFile.fileId = :fileId
             ORDER BY e.epcId, eh.eventTime
             """)
     List<EventHistory> findAllByCsv_FileIdForAiExport(@Param("fileId") Long fileId);

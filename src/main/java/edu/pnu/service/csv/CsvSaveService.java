@@ -15,7 +15,7 @@ import edu.pnu.exception.FileUploadException;
 import edu.pnu.exception.InvalidCsvFormatException;
 import edu.pnu.repository.CsvLocationRepository;
 import edu.pnu.repository.CsvProductRepository;
-import edu.pnu.repository.CsvRouteRepository;
+import edu.pnu.repository.CsvFileRepository;
 import edu.pnu.repository.EpcRepository;
 import edu.pnu.repository.MemberRepository;
 import edu.pnu.service.messaging.WebSocketService;
@@ -63,7 +63,7 @@ public class CsvSaveService {
 
     private final CsvProductRepository csvProductRepo;
     private final CsvLocationRepository csvLocationRepo;
-    private final CsvRouteRepository csvRepo;
+    private final CsvFileRepository csvRepo;
     private final EpcRepository epcRepo;
     private final MemberRepository memberRepo;
 

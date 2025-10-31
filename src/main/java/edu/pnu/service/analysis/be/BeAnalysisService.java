@@ -3,7 +3,7 @@ package edu.pnu.service.analysis.be;
 import edu.pnu.domain.CsvRoute;
 import edu.pnu.domain.BeAnalysis;
 import edu.pnu.domain.EventHistory;
-import edu.pnu.repository.AnalysisTripRepository;
+import edu.pnu.repository.CsvRouteRepository;
 import edu.pnu.repository.EventHistoryRepository;
 import edu.pnu.service.analysis.be.api.BeDetector;
 import edu.pnu.service.analysis.be.support.AssetCache;
@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class BeAnalysisService {
     private final EventHistoryRepository eventHistoryRepo;
-    private final AnalysisTripRepository analysisTripRepo;
+    private final CsvRouteRepository analysisTripRepo;
     private final BeAnalysisBatchSaver batchSaver;
     private final AssetCache assetCache;
     private final List<BeDetector> detectors;
@@ -47,7 +47,7 @@ public class BeAnalysisService {
 
         // [수정됨] AnalysisTrip 데이터도 미리 로드하여 EPC별로 그룹화합니다.
         Map<String, List<CsvRoute>> tripsByEpc = new HashMap<>();
-        try (Stream<CsvRoute> s = analysisTripRepo.streamByEpc_Csv_FileId(fileId)) {
+        try (Stream<CsvRoute> s = analysisTripRepo.streamByEpc_CsvFile_FileId(fileId)) {
             s.forEach(t -> tripsByEpc.computeIfAbsent(t.getEpc().getEpcCode(), k -> new ArrayList<>()).add(t));
         }
 

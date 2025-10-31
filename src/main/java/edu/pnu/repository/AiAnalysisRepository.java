@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AiAnalysisRepository extends JpaRepository<AiAnalysis, Long> {
 
-    long countByEventHistory_Csv_FileId(long fileId);
+    long countByEventHistory_CsvFile_FileId(long fileId);
 }

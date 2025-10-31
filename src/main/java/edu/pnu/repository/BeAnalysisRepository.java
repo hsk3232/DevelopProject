@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BeAnalysisRepository extends JpaRepository<BeAnalysis, Long> {
 
-    long countByEventHistory_Csv_FileId(long fileId);
+    long countByEventHistory_CsvFile_FileId(long fileId);
 }

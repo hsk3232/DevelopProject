@@ -3,7 +3,7 @@ package edu.pnu.service.csv;
 import edu.pnu.domain.CsvFile;
 import edu.pnu.dto.CsvFileDTO;
 import edu.pnu.exception.CsvFileNotFoundException;
-import edu.pnu.repository.CsvRouteRepository;
+import edu.pnu.repository.CsvFileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class CsvLogService {
-    private final CsvRouteRepository csvRepository;
+    private final CsvFileRepository csvFileRepo;
 
 
     @Transactional(readOnly = true)
@@ -33,7 +33,7 @@ public class CsvLogService {
 
 
         // findCsvListByCriteria 메서드를 호출하여 List<Csv> 타입의 csvList 변수에 결과를 할당
-        List<CsvFile> csvList = csvRepository.findCsvListByCriteria(locationId, cursor, search, pageable);
+        List<CsvFile> csvList = csvFileRepo.findCsvListByCriteria(locationId, cursor, search, pageable);
 
         Long nextCursor = null;
         if (!csvList.isEmpty() && csvList.size() == size) {
@@ -67,7 +67,7 @@ public class CsvLogService {
 
     // file ID 검색
     private CsvFile findCsvById(Long fileId) {
-        return csvRepository.findById(fileId)
+        return csvFileRepo.findById(fileId)
                 .orElseThrow(() -> new CsvFileNotFoundException("요청된 파일 ID를 찾을 수 없습니다: " + fileId));
     }
 }

@@ -6,9 +6,9 @@ import edu.pnu.domain.CsvFile;
 import edu.pnu.exception.CsvFileNotFoundException;
 import edu.pnu.repository.AiAnalysisRepository;
 import edu.pnu.repository.AnalysisSummaryRepository;
-import edu.pnu.repository.AnalysisTripRepository;
-import edu.pnu.repository.BeAnalysisRepository;
 import edu.pnu.repository.CsvRouteRepository;
+import edu.pnu.repository.BeAnalysisRepository;
+import edu.pnu.repository.CsvFileRepository;
 import edu.pnu.service.analysis.statistics.api.StatisticsInterface;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class KPIAnalysisProcess implements StatisticsInterface {
     private final AnalysisSummaryRepository analysisSummaryRepo;
-    private final AnalysisTripRepository analysisTripRepo;
+    private final CsvRouteRepository csvRouteRepo;
     private final AiAnalysisRepository aiAnalysisRepo;
     private final BeAnalysisRepository beAnalysisRepo;
-    private final CsvRouteRepository csvRepo;
+    private final CsvFileRepository csvRepo;
 
     @Override
     public String getProcessorName() {
@@ -45,9 +45,9 @@ public class KPIAnalysisProcess implements StatisticsInterface {
         CsvFile csv = csvRepo.findById(fileId)
                 .orElseThrow(() -> new CsvFileNotFoundException("Csv not found: " + fileId));
 
-        long totalTripCount = analysisTripRepo.countByEpc_Csv_FileId(fileId);
-        long beAnomalyCount = beAnalysisRepo.countByEventHistory_Csv_FileId(fileId);
-        long aiAnomalyCount = aiAnalysisRepo.countByEventHistory_Csv_FileId(fileId);
+        long totalTripCount = csvRouteRepo.countByEpc_CsvFile_FileId(fileId);
+        long beAnomalyCount = beAnalysisRepo.countByEventHistory_CsvFile_FileId(fileId);
+        long aiAnomalyCount = aiAnalysisRepo.countByEventHistory_CsvFile_FileId(fileId);
 
         double avgLeadTime = computeAverageLeadTimeSeconds(fileId);
 
@@ -64,7 +64,7 @@ public class KPIAnalysisProcess implements StatisticsInterface {
 
     private double computeAverageLeadTimeSeconds(Long fileId) {
         long n = 0, sum = 0;
-        try (Stream<CsvRoute> s = analysisTripRepo.streamByEpc_Csv_FileId(fileId)) {
+        try (Stream<CsvRoute> s = csvRouteRepo.streamByEpc_CsvFile_FileId(fileId)) {
             for (CsvRoute t : (Iterable<CsvRoute>) s::iterator) {
                 if (t.getFromEventTime() != null && t.getToEventTime() != null) {
                     sum += Duration.between(t.getFromEventTime(), t.getToEventTime()).getSeconds();

@@ -6,7 +6,7 @@ import edu.pnu.domain.CsvFile;
 import edu.pnu.domain.EventHistory;
 import edu.pnu.dto.AiCommunicationDTO;
 import edu.pnu.repository.AiAnalysisRepository;
-import edu.pnu.repository.CsvRouteRepository;
+import edu.pnu.repository.CsvFileRepository;
 import edu.pnu.repository.EventHistoryRepository;
 import edu.pnu.service.messaging.WebSocketService;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequiredArgsConstructor
 public class AiAnalysisService {
 
-    private final CsvRouteRepository csvRepo;
+    private final CsvFileRepository csvRepo;
     private final EventHistoryRepository eventHistoryRepo;
     private final AiAnalysisRepository aiAnalysisRepo;
     private final WebSocketService webSocketService;
