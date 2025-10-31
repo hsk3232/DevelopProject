@@ -24,10 +24,11 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "csv") // LAZY 순환/로그폭탄 방지
+@ToString(exclude = "csvFile") // LAZY 순환/로그폭탄 방지
 @Entity
 @Builder
-@Table(uniqueConstraints = {
+@Table(name = "epc",
+        uniqueConstraints = {
 		@UniqueConstraint(name="uq_epc_file_id_epc_code", columnNames={"file_id","epc_code"}), // Prevent duplication
 	    @UniqueConstraint(name="uq_epc_file_id_epc_id",   columnNames={"file_id","epc_id"}) // EventHistory 복합 FK 타깃
   })

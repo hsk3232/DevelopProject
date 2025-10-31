@@ -31,8 +31,8 @@ public class CsvSaveJdbcService {
         if (locations.isEmpty())
             return;
 
-        String sql = "INSERT INTO csvlocation "
-                + "(file_id, location_id, scan_location, operator_id, device_id) "
+        String sql = "INSERT INTO csv_location "
+                + "(file_id, csv_location_id, scan_location, operator_id, device_id) "
                 + "VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
@@ -40,7 +40,7 @@ public class CsvSaveJdbcService {
             public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 CsvLocation l = locations.get(i);
                 ps.setLong(1, l.getCsvFile().getFileId());
-                ps.setLong(2, l.getLocationId());
+                ps.setLong(2, l.getCsvLocationId());
                 ps.setString(3, l.getScanLocation());
                 ps.setObject(4, l.getOperatorId(), Types.BIGINT);
                 ps.setObject(5, l.getDeviceId(), Types.BIGINT);
@@ -58,18 +58,18 @@ public class CsvSaveJdbcService {
     public void saveCsvProducts(List<CsvProduct> products) {
         if (products.isEmpty()) return;
 
-        String sql = "INSERT INTO csvproduct "
-                + "(file_id, epc_product, epc_company, product_name) "
+        String sql = "INSERT INTO csv_product "
+                + "(file_id, csv_epc_product, csv_epc_company, csv_product_name) "
                 + "VALUES (?, ?, ?, ?)";
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
             @Override
             public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 CsvProduct p = products.get(i);
-                ps.setLong(1, p.getCsv().getFileId());
-                ps.setString(2, p.getEpcProduct());
-                ps.setString(3, p.getEpcCompany());
-                ps.setString(4, p.getProductName());
+                ps.setLong(1, p.getCsvFile().getFileId());
+                ps.setString(2, p.getCsvEpcProduct());
+                ps.setString(3, p.getCsvEpcCompany());
+                ps.setString(4, p.getCsvProductName());
             }
 
             @Override
@@ -112,19 +112,19 @@ public class CsvSaveJdbcService {
     public void saveEventHistories(List<EventHistory> events) {
         if (events.isEmpty()) return;
 
-        String sql = "INSERT INTO eventhistory " +
-                "(file_id, epc_id, csv_location_id, product_id, " +
+        String sql = "INSERT INTO event_history " +
+                "(file_id, epc_id, csv_location_id, csv_product_id, " +
                 "event_time, business_step, event_type, hub_type, business_original) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
-            public void setValues(PreparedStatement ps, int i) throws SQLException {
+            public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                 EventHistory eh = events.get(i);
                 ps.setLong(1, eh.getCsvFile().getFileId());
                 ps.setLong(2, eh.getEpc().getEpcId()); // epc_code 대신 epc_id
-                ps.setLong(3, eh.getCsvLocation().getLocationId()); // location_id 대신 csv_location_id
-                ps.setLong(4, eh.getCsvProduct().getProductId()); // 새로 추가된 product_id
+                ps.setLong(3, eh.getCsvLocation().getCsvLocationId()); // location_id 대신 csv_location_id
+                ps.setLong(4, eh.getCsvProduct().getCsvProductId()); // 새로 추가된 product_id
                 ps.setTimestamp(5, Timestamp.valueOf(eh.getEventTime()));
                 ps.setString(6, eh.getBusinessStep());
                 ps.setString(7, eh.getEventType());

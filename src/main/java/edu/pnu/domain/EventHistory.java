@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
 @ToString(exclude = {"csvFile", "epc", "csvLocation", "csvProduct"})
 @Entity
 
-@Table(
+@Table(name = "event_history",
         // 비즈니스 규칙: 특정 파일의, 특정 EPC는, 특정 시간, 특정 위치, 특정 이벤트 타입을 중복으로 가질 수 없음.
         // 이 제약조건은 event_id를 제외한 완벽하게 동일한 이벤트 데이터의 중복 삽입을 방지
         uniqueConstraints = {

@@ -150,7 +150,7 @@ public class AiAnalysisService {
     private AiCommunicationDTO.EventData toEventData(EventHistory eh) {
         return AiCommunicationDTO.EventData.builder()
                 .eventId(eh.getEventId())
-                .locationId(eh.getCsvLocation().getLocationId())
+                .locationId(eh.getCsvLocation().getCsvLocationId())
                 .businessStep(eh.getBusinessStep())
                 .eventType(eh.getEventType())
                 .eventTime(eh.getEventTime())

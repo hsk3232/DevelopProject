@@ -56,8 +56,8 @@ public class DetectRouteViolation implements BeDetector {
                     continue;
                 }
 
-                Long fromLocId = fromEvent.getCsvLocation().getLocationId();
-                Long toLocId = toEvent.getCsvLocation().getLocationId();
+                Long fromLocId = fromEvent.getCsvLocation().getCsvLocationId();
+                Long toLocId = toEvent.getCsvLocation().getCsvLocationId();
 
                 if (fromLocId == null || toLocId == null) {
                     log.warn("[DetectRouteViolation] missing locationId: epc={}, fromEventId={}, toEventId={}",

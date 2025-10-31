@@ -54,8 +54,8 @@ public class AnalysisTripGenerationService {
                     // 버전 2의 새로운 AnalysisTrip 엔티티를 생성합니다.
                     CsvRoute trip = CsvRoute.builder()
                             .epc(currentEvent.getEpc()) // EPC 엔티티 참조
-                            .fromLocationId(previousEvent.getCsvLocation().getLocationId())
-                            .toLocationId(currentEvent.getCsvLocation().getLocationId())
+                            .fromLocationId(previousEvent.getCsvLocation().getCsvLocationId())
+                            .toLocationId(currentEvent.getCsvLocation().getCsvLocationId())
                             .fromScanLocation(previousEvent.getCsvLocation().getScanLocation())
                             .toScanLocation(currentEvent.getCsvLocation().getScanLocation())
                             .fromBusinessStep(previousEvent.getBusinessStep())

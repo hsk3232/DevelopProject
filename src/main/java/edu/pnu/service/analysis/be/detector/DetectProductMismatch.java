@@ -62,9 +62,9 @@ public class DetectProductMismatch implements BeDetector {
                 continue;
             }
 
-            String productCode = representativeEvent.getCsvProduct().getEpcProduct();
-            String companyCode = representativeEvent.getCsvProduct().getEpcCompany();
-            String productName = representativeEvent.getCsvProduct().getProductName();
+            String productCode = representativeEvent.getCsvProduct().getCsvEpcProduct();
+            String companyCode = representativeEvent.getCsvProduct().getCsvEpcCompany();
+            String productName = representativeEvent.getCsvProduct().getCsvProductName();
 
             boolean isKnownProduct = assetCache.getKnownProductCodes().contains(productCode);
             boolean isKnownCompany = assetCache.getKnownCompanyCodes().contains(companyCode);

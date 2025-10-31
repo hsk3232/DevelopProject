@@ -27,7 +27,7 @@ import lombok.ToString;
 @Table(uniqueConstraints = {
 	    @UniqueConstraint(
 	    	      name="uq_csvProduct",
-	    	      columnNames = {"file_id", "epc_company", "epc_product"}) // 파일 내 동일 상품 코드 조합 중복 금지 	  
+	    	      columnNames = {"file_id", "csv_epc_company", "csv_epc_product"}) // 파일 내 동일 상품 코드 조합 중복 금지
 	  })
 public class CsvProduct {
 	@Id
@@ -42,5 +42,5 @@ public class CsvProduct {
 	//N:1에서 N은 자식이며, 관계의 주인!
 	@ManyToOne(fetch = FetchType.LAZY) // FK
 	@JoinColumn(name = "file_id")
-	private CsvFile csv;
+	private CsvFile csvFile;
 }

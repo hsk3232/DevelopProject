@@ -52,10 +52,10 @@ public class KPIAnalysisProcess implements StatisticsInterface {
         double avgLeadTime = computeAverageLeadTimeSeconds(fileId);
 
         AnalysisSummary summary = analysisSummaryRepo.findById(fileId)
-                .orElse(AnalysisSummary.builder().fileId(fileId).csv(csv).build());
+                .orElse(AnalysisSummary.builder().fileId(fileId).csvFile(csv).build());
 
         summary.setTotalEventCount(totalTripCount);
-        summary.setTotalErrorCount((int) beAnomalyCount);
+        summary.setBeTotalAnomalyCount((int) beAnomalyCount);
         summary.setAiTotalAnomalyCount((int) aiAnomalyCount);
         summary.setAvgLeadTime(avgLeadTime);
 

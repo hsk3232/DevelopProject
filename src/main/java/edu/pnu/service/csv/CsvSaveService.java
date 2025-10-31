@@ -206,7 +206,7 @@ public class CsvSaveService {
             if (locationId != null && cache.locationIds.add(locationId)) {
                 newLocations.add(CsvLocation.builder()
                         .csvFile(csv)
-                        .locationId(locationId)
+                        .csvLocationId(locationId)
                         .scanLocation(getValue(colIdx, row, "scan_location"))
                         .operatorId(parseLongSafe(getValue(colIdx, row, "operator_id")))
                         .deviceId(parseLongSafe(getValue(colIdx, row, "device_id")))
@@ -220,10 +220,10 @@ public class CsvSaveService {
                 String key = productKey(epcCompany, epcProduct);
                 if (!cache.productMap.containsKey(key)) {
                     CsvProduct p = CsvProduct.builder()
-                            .csv(csv)
-                            .epcProduct(epcProduct)
-                            .epcCompany(epcCompany)
-                            .productName(getValue(colIdx, row, "product_name"))
+                            .csvFile(csv)
+                            .csvEpcProduct(epcProduct)
+                            .csvEpcCompany(epcCompany)
+                            .csvProductName(getValue(colIdx, row, "product_name"))
                             .build();
                     newProducts.add(p);
                     cache.productMap.put(key, p); // 메모리 선반영 (ID는 save 후 채워짐)
@@ -257,7 +257,7 @@ public class CsvSaveService {
         if (!newProducts.isEmpty()) {
             Map<String, CsvProduct> freshProducts = csvProductRepo.findAllByFileIdAsMap(csv.getFileId());
             for (CsvProduct p : newProducts) {
-                String key = productKey(p.getEpcCompany(), p.getEpcProduct());
+                String key = productKey(p.getCsvEpcProduct(), p.getCsvEpcProduct());
                 CsvProduct persisted = freshProducts.get(key);
                 if (persisted != null) {
                     cache.productMap.put(key, persisted); // ← ID가 채워진 객체로 교체
@@ -487,7 +487,7 @@ public class CsvSaveService {
                 String.valueOf(fileId),
                 epc != null ? String.valueOf(epc.getEpcId()) : "null",
                 locationId != null ? String.valueOf(locationId) : "null",
-                product != null ? String.valueOf(product.getProductId()) : "null",
+                product != null ? String.valueOf(product.getCsvProductId()) : "null",
                 epoch,
                 businessStep != null ? businessStep : "null",
                 eventType != null ? eventType : "null"
