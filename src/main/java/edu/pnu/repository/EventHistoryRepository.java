@@ -1,6 +1,7 @@
 package edu.pnu.repository;
 
 import edu.pnu.domain.EventHistory;
+import edu.pnu.dto.DashboardDTO;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -52,4 +53,33 @@ public interface EventHistoryRepository extends JpaRepository<EventHistory, Long
             ORDER BY e.epcId, eh.eventTime
             """)
     List<EventHistory> findAllByCsv_FileIdForAiExport(@Param("fileId") Long fileId);
+
+
+    //[추가] 필터 옵션: 고유한 eventType 목록을 조회합니다.
+    @Query("""
+            SELECT DISTINCT e.eventType
+            FROM EventHistory e
+            WHERE e.csvFile.fileId = :fileId AND e.eventType IS NOT NULL
+            ORDER BY e.eventType
+            """)
+    List<String> findDistinctEventTypesByFileId(@Param("fileId") Long fileId);
+
+
+    @Query("""
+            SELECT new edu.pnu.dto.DashboardDTO.InventoryItem(
+                e.businessStep,
+                SUM(
+                    CASE
+                        WHEN e.eventType LIKE '%_Inbound' THEN 1L
+                        WHEN e.eventType LIKE '%_Outbound' THEN -1L
+                        ELSE 0L
+                    END
+                )
+            )
+            FROM EventHistory e
+            WHERE e.csvFile.fileId = :fileId
+            GROUP BY e.businessStep
+            ORDER BY e.businessStep
+            """)
+    List<DashboardDTO.InventoryItem> calculateInventoryByBusinessStep(@Param("fileId") Long fileId);
 }
