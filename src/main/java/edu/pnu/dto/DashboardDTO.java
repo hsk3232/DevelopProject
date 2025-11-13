@@ -117,7 +117,7 @@ public class DashboardDTO {
             private List<String> anomalyTypeList = new ArrayList<>();
 
             // JPA Constructor Expression 위한 생성자
-            // JPA 조회 결과에 포함되지 않는 필드(from, to, anomalyTypeList 등)이 DTO에 존재하기 때문에
+            // JPA 조회 결과에 포함되지 않는 필드(fromEntity, to, anomalyTypeList 등)이 DTO에 존재하기 때문에
             // @AllArgsConstructor 사용 안됨
             public AnalyzedTrip(String fromScanLocation, Double fromLongitude, Double fromLatitude,
                                 LocalDateTime fromEventTime, String fromBusinessStep, String toScanLocation, Double toLongitude,
@@ -219,7 +219,7 @@ public class DashboardDTO {
                     .dispatchRate(k.getDispatchRate())
                     .inventoryRate(k.getInventoryRate())
                     .avgLeadTime(k.getAvgLeadTime())
-                    .fileId(k.getCsv().getFileId())
+                    .fileId(k.getCsvFile().getFileId())
                     .kpiId(k.getKpiId())
                     .build();
         }

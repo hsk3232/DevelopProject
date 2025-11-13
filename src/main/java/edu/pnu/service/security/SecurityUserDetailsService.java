@@ -35,7 +35,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
         log.info("[성공] : [SecurityUserDetailsService] 사용자 [{}] 정보를 성공적으로 조회했습니다.", userId);
 
         // 2. 조회된 Member 엔티티를 CustomUserDetails 객체로 변환하여 반환
-        // CustomUserDetails.from() 팩토리 메서드를 사용하여 생성 로직을 캡슐화
+        // CustomUserDetails.fromEntity() 팩토리 메서드를 사용하여 생성 로직을 캡슐화
         return CustomUserDetails.from(member);
     }
 }

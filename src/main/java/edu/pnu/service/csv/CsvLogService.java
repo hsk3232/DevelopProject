@@ -41,7 +41,7 @@ public class CsvLogService {
         }
 
         // CsvFileDTO의 정적 팩토리 메서드를 사용하여 최종 응답 DTO를 생성
-        return CsvFileDTO.FileListResponse.from(csvList, nextCursor);
+        return CsvFileDTO.FileListResponse.fromEntity(csvList, nextCursor);
     }
 
     // 업로한 CSV 파일 재다운 로드

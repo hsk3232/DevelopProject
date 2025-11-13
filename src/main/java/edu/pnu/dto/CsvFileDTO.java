@@ -32,7 +32,7 @@ public class CsvFileDTO {
         private Long fileSize;
         private LocalDateTime createdAt;
 
-        public static FileInfo from(CsvFile c) {
+        public static FileInfo fromEntity(CsvFile c) {
             return FileInfo.builder()
                     .fileId(c.getFileId())
                     .fileName(c.getFileName())
@@ -57,9 +57,9 @@ public class CsvFileDTO {
         private List<FileInfo> data;
         private Long nextCursor;
 
-        public static FileListResponse from(List<CsvFile> csvList, Long nextCursor) {
+        public static FileListResponse fromEntity(List<CsvFile> csvList, Long nextCursor) {
             List<FileInfo> fileInfos = csvList.stream()
-                    .map(FileInfo::from)
+                    .map(FileInfo::fromEntity)
                     .collect(Collectors.toList());
 
             return new FileListResponse(fileInfos, nextCursor);

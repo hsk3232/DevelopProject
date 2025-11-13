@@ -60,7 +60,7 @@ public class DetectClones implements BeDetector {
                 Long fromLocId = trip.getFromLocationId();
                 Long toLocId = trip.getToLocationId();
 
-                // from/to Location ID가 없으면 검사 불가 -> 로깅 후 건너뜀
+                // fromEntity/to Location ID가 없으면 검사 불가 -> 로깅 후 건너뜀
                 if (fromLocId == null || toLocId == null) {
                     log.debug("[DetectRouteViolation] trip에 위치정보 없음: epc={}, tripId(relatedEventId)={}, fromLoc={}, toLoc={}",
                             epcCode, trip.getRelatedEventId(), fromLocId, toLocId);
