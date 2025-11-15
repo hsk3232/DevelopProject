@@ -15,7 +15,7 @@ public interface BeAnalysisRepository extends JpaRepository<BeAnalysis, Long> {
 
 
     //	[DashboardService].getNodeList
-    List<BeAnalysis> findByAnalyzedTrip_RoadIdIn(List<Long> eventIds);
+    List<BeAnalysis> findByAnalyzedTrip_RoadIdIn(List<Long> eventId);
 
     @Query("""
 	            SELECT be.anomalyType

@@ -20,10 +20,6 @@ public interface AiAnalysisRepository extends JpaRepository<AiAnalysis, Long> {
 
 
 
-
-
-
-
     @Query("""
 			    SELECT ad
 			    FROM AiAnalysis ad
